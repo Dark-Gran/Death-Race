@@ -29,7 +29,7 @@ _- Mobile version_
 
 ## Todo (Based on reception)
 _- Storyline (incl. Cutscenes)_  
-_- "Final race"_  
+_- "Final boss race"_  
 _- Choice of Weapons_  
 _- Car Customization_  
 _- More Quests_  
