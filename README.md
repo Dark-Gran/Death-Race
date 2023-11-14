@@ -21,7 +21,7 @@ The tournament base, which gives an otherwise arcade game more serious feeling, 
   
 _- Gameplay: Higher speeds_  
 _- Menus Upgrade (Out-of-Race GUI)_  
-_- Underground market_  
+_- Underground market (eg. mines)_  
 _- More Tracks & Cars (incl. Tier III)_  
 _- Sound & Music_  
 _- Mobile version_  
