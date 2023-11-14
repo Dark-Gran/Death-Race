@@ -48,4 +48,6 @@ Thanks to my friends who made some of the models (eg. all vehicles except for th
 ![preview4](_screenshots/04.png)  
 ---  
 ![preview5](_screenshots/05.png)  
+---
+![preview6](_screenshots/preview.gif)  
   
