@@ -5,7 +5,7 @@
 This is a FREE game.  
 Made in [Godot](https://github.com/godotengine/godot) 3.5.3, the open-source alternative to engines like Unity.
 
-[RELEASE DOWNLOAD](https://github.com/Dark-Gran/Death-Race/releases/tag/v0.1)  
+[ALPHA RELEASE DOWNLOAD](https://github.com/Dark-Gran/Death-Race/releases/tag/v0.1)  
 (Soundless)  
   
 **Controls:**  
@@ -17,17 +17,20 @@ The game attempts to recapture the driving feel of old Rockstar games like Death
   
 The tournament base, which gives an otherwise arcade game more serious feeling, is to be built upon to expand both gameplay (eg. choice of weapons) and atmosphere (storytelling).  
   
-## Todo  
+## Todo for Beta  
   
+_- Gameplay: Higher speeds_  
 _- Menus Upgrade (Out-of-Race GUI)_  
-_- Weapon Shop_  
+_- Underground market_  
 _- More Tracks & Cars (incl. Tier III)_  
 _- Sound & Music_  
-_- Storyline (incl. Cutscenes)_  
-_- Gameplay polish_  
+_- Mobile version_  
+
 
 ## Todo (Based on reception)
-_- More weapons_  
+_- Storyline (incl. Cutscenes)_  
+_- "Final race"_  
+_- Choice of Weapons_  
 _- Car Customization_  
 _- More Quests_  
 _- More Tracks & Cars_  
