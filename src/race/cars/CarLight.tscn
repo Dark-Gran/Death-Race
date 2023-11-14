@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="Light" type="SpotLight" groups=[
+"reflectors",
+]]
+light_color = Color( 1, 0.709804, 0.4, 1 )
+light_energy = 3.5
+light_bake_mode = 0
+light_cull_mask = 4294967291
+shadow_enabled = true
+shadow_bias = -0.01
+shadow_reverse_cull_face = true
+spot_range = 4.0
+spot_attenuation = 1.68179

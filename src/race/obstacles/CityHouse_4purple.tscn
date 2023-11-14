@@ -1,0 +1,59 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/materials/fabric_purple.tres" type="Material" id=1]
+[ext_resource path="res://assets/materials/bricks_purple.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/window_house.tres" type="Material" id=3]
+[ext_resource path="res://assets/materials/metal_grey_bolder.tres" type="Material" id=4]
+[ext_resource path="res://assets/materials/metal_grey_nooutline.tres" type="Material" id=5]
+[ext_resource path="res://assets/materials/wood_brown.tres" type="Material" id=6]
+[ext_resource path="res://assets/materials/_physics/phx_basic.tres" type="PhysicsMaterial" id=7]
+[ext_resource path="res://assets/objects/building6.obj" type="ArrayMesh" id=8]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 5.16788, 6.07093, 5.16853 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1.88917, 2.94791, 0.668807 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 4.67054, 0.200081, 0.769554 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 3.87963, 0.210667, 0.638681 )
+
+[node name="CityHouse" type="StaticBody"]
+collision_layer = 11
+collision_mask = 0
+physics_material_override = ExtResource( 7 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
+layers = 3
+use_in_baked_light = true
+mesh = ExtResource( 8 )
+material/0 = ExtResource( 2 )
+material/1 = ExtResource( 3 )
+material/2 = ExtResource( 5 )
+material/3 = ExtResource( 1 )
+material/4 = ExtResource( 4 )
+material/5 = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.97222, 0 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.05477, -5.65631 )
+visible = false
+shape = SubResource( 2 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.882948, -0.469472, 0, 0.469472, 0.882948, 0.471697, 3.81687, 5.49486 )
+visible = false
+shape = SubResource( 3 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( -4.3693e-08, 0.497729, 0.867333, 1.26616e-09, 0.867333, -0.497729, -1, -2.06491e-08, -3.85266e-08, 5.55551, 3.43046, 1.89071 )
+visible = false
+shape = SubResource( 4 )

@@ -1,0 +1,172 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/fonts/Autumn__.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://src/menuscreens/mainmenu/GFXOption.gd" type="Script" id=2]
+[ext_resource path="res://src/CanvasItemFade.gd" type="Script" id=3]
+[ext_resource path="res://src/menuscreens/mainmenu/GFXMenu.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+outline_size = 3
+outline_color = Color( 0.17, 0.17, 0.17, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+outline_size = 3
+outline_color = Color( 0.17, 0.17, 0.17, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[node name="Settings" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_top = 300
+custom_constants/margin_bottom = 50
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+menu_name = "GFXSettings"
+screen_name = "MenuScreens"
+engage_with_arrows = [ 0, 1, 2, 3, 4, 5, 6 ]
+esc_index = 8
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+margin_top = 300.0
+margin_right = 1920.0
+margin_bottom = 1030.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Option" type="Label" parent="Buttons"]
+margin_right = 1920.0
+margin_bottom = 61.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+text = "Overall:"
+script = ExtResource( 2 )
+current_text = "Overall:"
+
+[node name="Option2" type="Label" parent="Buttons"]
+margin_top = 65.0
+margin_right = 1920.0
+margin_bottom = 126.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+text = "MSAA:"
+script = ExtResource( 2 )
+current_text = "MSAA:"
+focus_symbol = ". (Affects performance greatly)"
+option_type = 1
+
+[node name="Option3" type="Label" parent="Buttons"]
+margin_top = 130.0
+margin_right = 1920.0
+margin_bottom = 191.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+text = "SSAO:"
+script = ExtResource( 2 )
+current_text = "SSAO:"
+focus_symbol = ". (Affects performance and visuals greatly)"
+option_type = 2
+
+[node name="Option4" type="Label" parent="Buttons"]
+margin_top = 195.0
+margin_right = 1920.0
+margin_bottom = 256.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+text = "Shadows:"
+script = ExtResource( 2 )
+current_text = "Shadows:"
+option_type = 3
+
+[node name="Option5" type="Label" parent="Buttons"]
+margin_top = 260.0
+margin_right = 1920.0
+margin_bottom = 321.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+text = "Glow:"
+script = ExtResource( 2 )
+current_text = "Glow:"
+option_type = 4
+
+[node name="Option6" type="Label" parent="Buttons"]
+margin_top = 325.0
+margin_right = 1920.0
+margin_bottom = 386.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+text = "Grass:"
+script = ExtResource( 2 )
+current_text = "Grass:"
+option_type = 5
+
+[node name="Option7" type="Label" parent="Buttons"]
+margin_top = 390.0
+margin_right = 1920.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+custom_fonts/font = SubResource( 1 )
+text = "Low-End Disable:
+None"
+script = ExtResource( 2 )
+current_text = "Low-End Disable:"
+option_type = 6
+
+[node name="Option8" type="Label" parent="Buttons"]
+margin_top = 604.0
+margin_right = 1920.0
+margin_bottom = 665.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+text = "Apply"
+script = ExtResource( 2 )
+current_text = "Apply"
+option_type = 7
+
+[node name="Option9" type="Label" parent="Buttons"]
+margin_top = 669.0
+margin_right = 1920.0
+margin_bottom = 730.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+text = "Exit"
+script = ExtResource( 2 )
+current_text = "Exit"
+option_type = 8
+
+[node name="HowToFPS" type="Label" parent="."]
+visible = false
+margin_top = 300.0
+margin_right = 1920.0
+margin_bottom = 1030.0
+size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
+text = "Use F9 to toggle fps"
+align = 1
+valign = 2
+script = ExtResource( 3 )
+delay_start = 0.0
+delay_mid = 1.0
+delay_end = 0.0
+die_on_end = false
+precompleted = true

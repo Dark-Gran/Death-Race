@@ -1,0 +1,127 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/materials/wood_red.tres" type="Material" id=1]
+[ext_resource path="res://assets/objects/railroad_gate.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/materials/_physics/phx_basic.tres" type="PhysicsMaterial" id=3]
+[ext_resource path="res://assets/objects/railroad_gate_partB.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://assets/materials/wood_white.tres" type="Material" id=5]
+[ext_resource path="res://assets/objects/railroad_gate_partA.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://assets/materials/metal_truegrey.tres" type="Material" id=7]
+[ext_resource path="res://assets/materials/wood_brown_nooutline.tres" type="Material" id=8]
+[ext_resource path="res://src/race/Detachable.gd" type="Script" id=9]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.264745, 0.703312, 0.148608 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "GateMove"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 3, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 90 ), Vector3( 0, 0, 90 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.0669477, 0.782341, 0.0527001 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "GateMove"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 3, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 90 ), Vector3( 0, 0, 90 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.0736231, 1.50475, 0.0702642 )
+
+[node name="RailroadGate" type="StaticBody"]
+collision_layer = 11
+collision_mask = 0
+physics_material_override = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+use_in_baked_light = true
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.719623, 0.0409541 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="RailroadGatePartA" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.074, 1.117, 0.276 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RailroadGatePartA"]
+playback_speed = 0.3
+anims/GateMove = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RailroadGatePartA"]
+use_in_baked_light = true
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 7 )
+material/1 = ExtResource( 5 )
+material/2 = ExtResource( 5 )
+material/3 = ExtResource( 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="RailroadGatePartA"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0635196, -0.159251, 0 )
+visible = false
+shape = SubResource( 3 )
+
+[node name="RailroadGatePartB" type="RigidBody" parent="." groups=[
+"no_bullet_physics",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.074, 1.117, 0.276 )
+collision_layer = 13
+collision_mask = 13
+mode = 3
+mass = 65.0
+physics_material_override = ExtResource( 3 )
+script = ExtResource( 9 )
+offset_origin = Vector3( 0, -2, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RailroadGatePartB"]
+playback_speed = 0.3
+anims/GateMove = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RailroadGatePartB"]
+use_in_baked_light = true
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 5 )
+material/1 = ExtResource( 1 )
+material/2 = ExtResource( 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="RailroadGatePartB"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.063, 2.141, 0 )
+visible = false
+shape = SubResource( 5 )
+
+[node name="Area" type="Area" parent="RailroadGatePartB"]
+monitorable = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="RailroadGatePartB/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.063, 2.141, 0 )
+visible = false
+shape = SubResource( 5 )
+
+[connection signal="body_entered" from="RailroadGatePartB/Area" to="RailroadGatePartB" method="_on_body_entered"]

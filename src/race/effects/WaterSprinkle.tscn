@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/materials/effects/Water.tres" type="Material" id=1]
+[ext_resource path="res://assets/textures/little_white_64.png" type="Texture" id=2]
+[ext_resource path="res://src/race/HiderArea.gd" type="Script" id=3]
+[ext_resource path="res://assets/materials/effects/ColorRamp_Alpha1to0.tres" type="Texture" id=4]
+
+[sub_resource type="ParticlesMaterial" id=3]
+direction = Vector3( 0, 1, 0 )
+spread = 10.9
+initial_velocity = 5.0
+linear_accel = 2.5
+damping = 1.0
+scale = 0.35
+color_ramp = ExtResource( 4 )
+
+[sub_resource type="ArrayMesh" id=4]
+surfaces/0 = {
+"aabb": AABB( -0.250292, -0.250292, 0, 0.500594, 0.500584, 1e-05 ),
+"array_data": PoolByteArray( 70, 38, 128, 62, 70, 38, 128, 190, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 60, 0, 60, 70, 38, 128, 190, 70, 38, 128, 190, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 60, 70, 38, 128, 62, 70, 38, 128, 62, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 60, 0, 0, 70, 38, 128, 190, 70, 38, 128, 62, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 2, 0, 2, 0, 1, 0, 3, 0 ),
+"blend_shape_data": [  ],
+"format": 97559,
+"index_count": 6,
+"material": ExtResource( 1 ),
+"name": "Material",
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.05, 0.5, 0.05 )
+
+[node name="WaterSprinkle" type="Particles"]
+cast_shadow = 0
+amount = 96
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+cast_shadow = 0
+modulate = Color( 0.0431373, 0.0431373, 0.0431373, 1 )
+pixel_size = 0.005
+axis = 1
+double_sided = false
+texture = ExtResource( 2 )
+
+[node name="Area" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+shape = SubResource( 5 )

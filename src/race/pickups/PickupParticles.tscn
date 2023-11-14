@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/materials/effects/ColorRamp_Alpha0to1to0.tres" type="Texture" id=1]
+[ext_resource path="res://assets/materials/PickupParticles.tres" type="Material" id=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 1
+emission_sphere_radius = 0.3
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+tangential_accel = 0.5
+damping = 0.2
+scale = 0.4
+color_ramp = ExtResource( 1 )
+
+[sub_resource type="ArrayMesh" id=2]
+surfaces/0 = {
+"aabb": AABB( -0.250292, -0.250292, 0, 0.500594, 0.500584, 1e-05 ),
+"array_data": PoolByteArray( 70, 38, 128, 62, 70, 38, 128, 190, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 60, 0, 60, 70, 38, 128, 190, 70, 38, 128, 190, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 60, 70, 38, 128, 62, 70, 38, 128, 62, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 60, 0, 0, 70, 38, 128, 190, 70, 38, 128, 62, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 2, 0, 2, 0, 1, 0, 3, 0 ),
+"blend_shape_data": [  ],
+"format": 97559,
+"index_count": 6,
+"material": ExtResource( 2 ),
+"name": "Material",
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+
+[node name="PickupParticles" type="Particles"]
+sorting_offset = 1.0
+cast_shadow = 0
+amount = 10
+speed_scale = 0.2
+local_coords = false
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 2 )

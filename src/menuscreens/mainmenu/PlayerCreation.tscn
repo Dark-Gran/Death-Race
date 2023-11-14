@@ -1,0 +1,248 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/gui/cloud_white.png" type="Texture" id=1]
+[ext_resource path="res://assets/fonts/Autumn__.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/portraits/00.png" type="Texture" id=3]
+[ext_resource path="res://assets/fonts/mainfont_50.tres" type="DynamicFont" id=4]
+[ext_resource path="res://src/menuscreens/mainmenu/CreationOption.gd" type="Script" id=5]
+[ext_resource path="res://src/menuscreens/mainmenu/FocusMenu.gd" type="Script" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+size = 50
+outline_size = 3
+outline_color = Color( 0.168627, 0.168627, 0.168627, 1 )
+use_filter = true
+extra_spacing_top = -8
+font_data = ExtResource( 2 )
+
+[node name="PlayerCreation" type="MarginContainer"]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 1870.0
+margin_bottom = 929.0
+rect_pivot_offset = Vector2( -989.616, 28.802 )
+custom_constants/margin_top = 200
+custom_constants/margin_left = 80
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+menu_name = "PlayerCreation"
+screen_name = "MenuScreens"
+engage_with_arrows = [ 0, 2 ]
+esc_index = 4
+
+[node name="Buttons" type="Control" parent="."]
+margin_left = 80.0
+margin_top = 200.0
+margin_right = 1820.0
+margin_bottom = 879.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Portrait" type="Control" parent="Buttons"]
+margin_left = 5.0
+margin_top = 36.0
+margin_right = 209.0
+margin_bottom = 242.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+focus_path = NodePath("Focus")
+
+[node name="Focus" type="ColorRect" parent="Buttons/Portrait"]
+visible = false
+margin_left = -3.0
+margin_top = 2.0
+margin_right = 203.0
+margin_bottom = 208.0
+color = Color( 0.858824, 0.858824, 0.858824, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pic" type="TextureRect" parent="Buttons/Portrait"]
+margin_top = 5.0
+margin_right = 200.0
+margin_bottom = 205.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="Buttons/Portrait"]
+modulate = Color( 0.0862745, 0.0941176, 0.101961, 1 )
+show_behind_parent = true
+margin_left = -42.0
+margin_top = -22.0
+margin_right = 626.0
+margin_bottom = 391.0
+size_flags_horizontal = 3
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="VBoxContainer" parent="Buttons"]
+margin_left = 231.0
+margin_top = 111.0
+margin_right = 585.0
+margin_bottom = 237.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 12
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+type = 1
+focus_path = NodePath("LineEdit/Focus")
+
+[node name="Label" type="Label" parent="Buttons/Name"]
+margin_right = 143.0
+margin_bottom = 61.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+size_flags_stretch_ratio = 2.0
+custom_fonts/font = ExtResource( 4 )
+text = "Name: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="Buttons/Name"]
+margin_top = 73.0
+margin_right = 354.0
+margin_bottom = 126.0
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+max_length = 14
+expand_to_text_length = true
+context_menu_enabled = false
+selecting_enabled = false
+
+[node name="Focus" type="ColorRect" parent="Buttons/Name/LineEdit"]
+visible = false
+show_behind_parent = true
+margin_left = -14.0
+margin_top = -10.0
+margin_right = 346.0
+margin_bottom = 59.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Buttons/Name/LineEdit"]
+show_behind_parent = true
+margin_left = -11.0
+margin_top = -7.0
+margin_right = 343.0
+margin_bottom = 56.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hue" type="Control" parent="Buttons"]
+margin_left = 63.0
+margin_top = 277.0
+margin_right = 526.0
+margin_bottom = 332.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+type = 2
+focus_path = NodePath("Marker/Focus")
+
+[node name="Back2" type="ColorRect" parent="Buttons/Hue"]
+margin_left = 9.0
+margin_top = 19.0
+margin_right = 455.0
+margin_bottom = 30.0
+color = Color( 0.101961, 0.101961, 0.101961, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="ColorRect" parent="Buttons/Hue"]
+margin_left = 12.0
+margin_top = 22.0
+margin_right = 452.0
+margin_bottom = 27.0
+color = Color( 0.15, 0.15, 0.15, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Marker" type="ColorRect" parent="Buttons/Hue"]
+margin_left = 10.0
+margin_top = 5.0
+margin_right = 18.0
+margin_bottom = 45.0
+color = Color( 0.65098, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Buttons/Hue/Marker"]
+show_behind_parent = true
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 10.0
+margin_bottom = 42.0
+color = Color( 0.101961, 0.101961, 0.101961, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Focus" type="ColorRect" parent="Buttons/Hue/Marker"]
+visible = false
+show_behind_parent = true
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 10.0
+margin_bottom = 42.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Label" parent="Buttons"]
+margin_left = 141.375
+margin_top = 357.443
+margin_right = 240.375
+margin_bottom = 418.443
+size_flags_horizontal = 0
+size_flags_vertical = 0
+size_flags_stretch_ratio = 2.0
+custom_fonts/font = ExtResource( 4 )
+text = "Start"
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+type = 3
+
+[node name="Back" type="Label" parent="Buttons"]
+margin_left = 331.011
+margin_top = 357.443
+margin_right = 430.011
+margin_bottom = 418.443
+size_flags_horizontal = 0
+size_flags_vertical = 0
+size_flags_stretch_ratio = 2.0
+custom_fonts/font = ExtResource( 4 )
+text = "Back"
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+type = 4
+
+[connection signal="text_changed" from="Buttons/Name/LineEdit" to="Buttons/Name" method="_on_text_changed"]

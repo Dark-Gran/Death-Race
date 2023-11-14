@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/dg_logo.png" type="Texture" id=1]
+[ext_resource path="res://assets/gui/loading_gearfill.png" type="Texture" id=2]
+[ext_resource path="res://src/Logo.gd" type="Script" id=3]
+[ext_resource path="res://src/LoadingScene.gd" type="Script" id=4]
+[ext_resource path="res://assets/gui/RotatedMaskShader.gdshader" type="Shader" id=5]
+[ext_resource path="res://src/LoadingAnimation.gd" type="Script" id=6]
+[ext_resource path="res://assets/gui/loading_gearmask.png" type="Texture" id=7]
+[ext_resource path="res://src/CanvasItemFade.gd" type="Script" id=8]
+[ext_resource path="res://assets/gui/loading_gear.png" type="Texture" id=11]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 5 )
+shader_param/rotation = 0.0
+shader_param/mask = ExtResource( 7 )
+
+[node name="LoadingScene" type="Control"]
+pause_mode = 2
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Curtain" type="ColorRect" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_right = 1920.0
+margin_bottom = 1080.0
+color = Color( 0, 0, 0, 1 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+speed_in = 1.2
+delay_start = 0.0
+die_on_end = false
+precompleted = true
+fade_type = 1
+
+[node name="Logo" type="TextureRect" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 1 )
+stretch_mode = 4
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+skip_binds = [ "ui_select", "ui_cancel" ]
+
+[node name="LoadingAnimation" type="Control" parent="."]
+pause_mode = 2
+margin_left = 1815.0
+margin_top = 899.0
+margin_right = 1815.0
+margin_bottom = 899.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Gear" type="Sprite" parent="LoadingAnimation"]
+position = Vector2( 7.76489, 84.584 )
+rotation = 0.698132
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Fill" type="TextureProgress" parent="LoadingAnimation"]
+material = SubResource( 1 )
+margin_right = 100.0
+margin_bottom = 100.0
+rect_rotation = 40.0
+max_value = 1.0
+step = 0.0
+texture_progress = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}

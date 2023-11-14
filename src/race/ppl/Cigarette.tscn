@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/ppl/cigarette.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/materials/plastic_black.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/plastic_white.tres" type="Material" id=3]
+[ext_resource path="res://assets/materials/paper_yellow_nooutline.tres" type="Material" id=4]
+[ext_resource path="res://assets/objects/plane_rotatedX.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://assets/textures/little_white_64.png" type="Texture" id=6]
+[ext_resource path="res://assets/materials/effects/ColorRamp_Alpha1to0.tres" type="Texture" id=7]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 1
+params_billboard_keep_scale = true
+albedo_color = Color( 0.2964, 0.320087, 0.38, 0.282353 )
+albedo_texture = ExtResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+spread = 10.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.05
+scale = 0.3
+scale_random = 0.25
+color_ramp = ExtResource( 7 )
+
+[node name="Cigarette" type="BoneAttachment"]
+transform = Transform( 2.98023e-08, -1, 4.85542e-15, 1, -5.96046e-08, -4.01339e-07, 4.01339e-07, 1.42109e-14, 1, -0.78548, 0.573537, 4.83531e-14 )
+bone_name = "Hand.R"
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, -8.52651e-14, 0, 6.74903e-21, 1, -3.38813e-21, 0, 2.03288e-20, 1, 0.0217333, 0.102871, 0.0186879 )
+cast_shadow = 0
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 4 )
+material/1 = ExtResource( 3 )
+material/2 = ExtResource( 2 )
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 1, -8.17124e-14, 0, 6.74902e-21, 1, -3.38813e-21, 0, 2.20229e-20, 1, 0.0217332, 0.102871, -0.107121 )
+material_override = SubResource( 1 )
+cast_shadow = 0
+amount = 16
+lifetime = 5.0
+local_coords = false
+process_material = SubResource( 2 )
+draw_pass_1 = ExtResource( 5 )

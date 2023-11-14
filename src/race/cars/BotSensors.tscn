@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 6.56184
+height = 0.002
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( -2.14611, 0.359535, 0, -2.14611, -0.359535, 0, 2.14611, 0.359535, -2.14611, 2.14611, -0.359535, -2.14611, 2.14611, 0.359535, -2.14611, 2.14611, -0.359535, -2.14611, 2.14611, 0.359535, 2.14611, 2.14611, -0.359535, 2.14611, 2.14611, 0.359535, 2.14611, 2.14611, -0.359535, 2.14611, -2.14611, 0.359535, 0, -2.14611, -0.359535, 0, 2.14611, -0.359535, -2.14611, -2.14611, -0.359535, 0, 2.14611, -0.359535, 2.14611, -2.14611, 0.359535, 0, 2.14611, 0.359535, -2.14611, 2.14611, 0.359535, 2.14611 )
+
+[node name="BotSensors" type="Spatial"]
+
+[node name="BotCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.487451, 1.28513 )
+enabled = true
+cast_to = Vector3( 0, 0, 4 )
+collision_mask = 8
+collide_with_areas = true
+
+[node name="BotCastLeft" type="RayCast" parent="."]
+transform = Transform( 0.996195, 0, 0.0871557, 0, 1, 0, -0.0871557, 0, 0.996195, 0.77, -0.487451, 1.285 )
+enabled = true
+cast_to = Vector3( 0, 0, 4 )
+collision_mask = 8
+collide_with_areas = true
+
+[node name="BotCastRight" type="RayCast" parent="."]
+transform = Transform( 0.996195, 0, -0.0871557, 0, 1, 0, 0.0871557, 0, 0.996195, -0.77, -0.487451, 1.285 )
+enabled = true
+cast_to = Vector3( 0, 0, 4 )
+collision_mask = 8
+collide_with_areas = true
+
+[node name="Around" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="Around"]
+shape = SubResource( 1 )
+
+[node name="Ahead" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="Ahead"]
+transform = Transform( -6.20265e-08, 0, -1.864, 0, 1.419, 0, 1.419, 0, -8.1478e-08, 0, 0, 3.145 )
+shape = SubResource( 2 )
+
+[node name="BotCastBack" type="RayCast" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.487451, -2.00202 )
+enabled = true
+cast_to = Vector3( 0, 0, 6 )
+collision_mask = 16
+collide_with_areas = true

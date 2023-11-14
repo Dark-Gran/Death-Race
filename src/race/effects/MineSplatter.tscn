@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/textures/mineremnant.png" type="Texture" id=1]
+
+[node name="MineSplatter" type="Sprite"]
+modulate = Color( 0.04, 0, 0, 0.7 )
+position = Vector2( -3.57628e-07, -1.00148 )
+scale = Vector2( 0.076, 0.0760071 )
+z_index = -1
+z_as_relative = false
+texture = ExtResource( 1 )

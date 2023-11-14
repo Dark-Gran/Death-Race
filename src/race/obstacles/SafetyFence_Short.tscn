@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/materials/metal_grey.tres" type="Material" id=1]
+[ext_resource path="res://assets/objects/safetyfence_short.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/materials/_physics/phx_basic.tres" type="PhysicsMaterial" id=3]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.205599, 0.701089, 1.42568 )
+
+[node name="SafetyFence" type="StaticBody"]
+collision_layer = 11
+collision_mask = 0
+physics_material_override = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+material_override = ExtResource( 1 )
+use_in_baked_light = true
+mesh = ExtResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0392895, 0.68964, 2.16537 )
+visible = false
+shape = SubResource( 1 )

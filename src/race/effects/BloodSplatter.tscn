@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/textures/splatter0.png" type="Texture" id=2]
+[ext_resource path="res://src/race/GrowMask2D.gd" type="Script" id=3]
+
+[node name="BloodSplatter" type="Sprite"]
+modulate = Color( 0.04, 0, 0, 0.7 )
+position = Vector2( -2.94961, -3.95248 )
+scale = Vector2( 0.048, 0.048 )
+z_index = -1
+z_as_relative = false
+texture = ExtResource( 2 )
+script = ExtResource( 3 )

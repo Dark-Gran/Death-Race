@@ -1,0 +1,62 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/materials/metal_paintedblue.tres" type="Material" id=1]
+[ext_resource path="res://assets/materials/metal_grey.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/bricks_blue.tres" type="Material" id=3]
+[ext_resource path="res://assets/materials/window_house.tres" type="Material" id=4]
+[ext_resource path="res://assets/objects/budova.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://assets/materials/_physics/phx_basic.tres" type="PhysicsMaterial" id=6]
+[ext_resource path="res://assets/materials/metal_grey_bolder.tres" type="Material" id=7]
+
+[sub_resource type="ConvexPolygonShape" id=1]
+points = PoolVector3Array( -3.77828, 0.1133, 5.53254, -3.77828, 0.1133, 6.08642, -3.77709, 2.87324, 5.53432, -3.77709, 2.87324, 6.08464, -3.41021, 2.87324, 5.53432, -3.41021, 2.87324, 6.08464, -3.40903, 0.1133, 5.53254, -3.40903, 0.1133, 6.08642 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 6.57192, 5.58284, 3.92379 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 2.1323, 2.77017, 4.53336 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 6.53763, 0.656135, 0.869372 )
+
+[node name="Building" type="StaticBody"]
+collision_layer = 11
+collision_mask = 0
+physics_material_override = ExtResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 2.312, 0, 0, 0, 2.312, 0, 0, 0, 2.312, 0, 0, 0 )
+layers = 3
+use_in_baked_light = true
+mesh = ExtResource( 5 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 4 )
+material/2 = ExtResource( 7 )
+material/3 = ExtResource( 1 )
+material/4 = ExtResource( 2 )
+
+[node name="CollisionShape9" type="CollisionShape" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 1.697, 0, 0, 0, 1.5, 0, -0.112432, 0 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape10" type="CollisionShape" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 1.697, 0, 0, 0, 1.5, 10.3627, -0.112432, 0 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape11" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.292738, 0.439105, 0 )
+visible = false
+shape = SubResource( 2 )
+
+[node name="CollisionShape12" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.94071, -2.72367, -1.07434 )
+visible = false
+shape = SubResource( 3 )
+
+[node name="CollisionShape13" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.256961, 3.44569, -4.73373 )
+visible = false
+shape = SubResource( 4 )

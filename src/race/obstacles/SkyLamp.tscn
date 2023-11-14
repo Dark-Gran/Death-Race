@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/materials/skymetal_grey.tres" type="Material" id=1]
+[ext_resource path="res://src/race/BreakableLamp.gd" type="Script" id=2]
+[ext_resource path="res://assets/materials/_physics/phx_basic.tres" type="PhysicsMaterial" id=3]
+[ext_resource path="res://assets/objects/industriallamp.obj" type="ArrayMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=1]
+resource_local_to_scene = true
+albedo_color = Color( 0.643283, 0.65, 0.4485, 1 )
+metallic_specular = 0.6
+roughness = 0.2
+emission_enabled = true
+emission = Color( 0.643283, 0.65, 0.4485, 1 )
+emission_energy = 0.2
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1.06328, 0.624999, 0.137467 )
+
+[sub_resource type="CylinderShape" id=3]
+radius = 0.206989
+height = 7.12482
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.111783, 0.567697, 0.271378 )
+
+[node name="SkyLamp" type="StaticBody" groups=[
+"breakables",
+"lamps",
+]]
+collision_layer = 11
+collision_mask = 0
+physics_material_override = ExtResource( 3 )
+script = ExtResource( 2 )
+emitting = 2
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1.089, 0, 0, 0, 1, 0, 0, 0 )
+use_in_baked_light = true
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 1 )
+material/1 = ExtResource( 1 )
+material/2 = SubResource( 1 )
+
+[node name="Light" type="SpotLight" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, -0.666332, 0.690649, 0, -0.657345, -0.700092, -0.0170274, 5.30962, 0.382622 )
+light_color = Color( 0.994833, 1, 0.69, 1 )
+light_energy = 3.0
+shadow_enabled = true
+shadow_bias = 0.1
+spot_range = 12.0
+spot_attenuation = 1.5
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.0173301, 5.79451, 0.142009 )
+visible = false
+shape = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 3.6118, 0 )
+visible = false
+shape = SubResource( 3 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 0.917074, 0, 0.398717, 0, 1, 0, -0.398717, 0, 0.917074, 0, 0.554795, 0 )
+visible = false
+shape = SubResource( 4 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="."]
+transform = Transform( 0.927386, 0, -0.374105, 0, 1, 0, 0.374105, 0, 0.927386, 0, 0.554795, 0 )
+visible = false
+shape = SubResource( 4 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="."]
+transform = Transform( 0.385729, 0, -0.922612, 0, 1, 0, 0.922612, 0, 0.385729, 0, 0.554795, 0 )
+visible = false
+shape = SubResource( 4 )
+
+[node name="CollisionShape6" type="CollisionShape" parent="."]
+transform = Transform( -0.376629, 0, -0.926364, 0, 1, 0, 0.926364, 0, -0.376629, 0, 0.554795, 0 )
+visible = false
+shape = SubResource( 4 )

@@ -1,0 +1,264 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://assets/materials/metal_silver_tightest.tres" type="Material" id=1]
+[ext_resource path="res://src/race/Wheel.gd" type="Script" id=2]
+[ext_resource path="res://assets/materials/tyre.tres" type="Material" id=3]
+[ext_resource path="res://assets/cars/impala_wheel.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://src/race/Car.gd" type="Script" id=5]
+[ext_resource path="res://assets/materials/plastic_black.tres" type="Material" id=6]
+[ext_resource path="res://assets/materials/chroma.tres" type="Material" id=7]
+[ext_resource path="res://assets/materials/window_car_tight.tres" type="Material" id=8]
+[ext_resource path="res://assets/materials/light_carOn.tres" type="Material" id=9]
+[ext_resource path="res://assets/materials/car_brakelights_nooutline.tres" type="Material" id=10]
+[ext_resource path="res://assets/materials/car_blinkers.tres" type="Material" id=11]
+[ext_resource path="res://src/race/weapons/Sting.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/materials/car_base_tight.tres" type="Material" id=13]
+[ext_resource path="res://src/race/effects/FinalDamage.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/materials/_physics/phx_car.tres" type="PhysicsMaterial" id=15]
+[ext_resource path="res://assets/cars/impala.obj" type="ArrayMesh" id=16]
+[ext_resource path="res://src/race/effects/CarSmoke1.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/race/WheelArea.gd" type="Script" id=18]
+[ext_resource path="res://src/race/effects/TTSmoke.tscn" type="PackedScene" id=19]
+[ext_resource path="res://src/race/effects/Nitro.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/race/cars/CarLight.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/race/effects/CarSmoke2.tscn" type="PackedScene" id=22]
+[ext_resource path="res://assets/cars/WheelShape.shape" type="Shape" id=23]
+[ext_resource path="res://assets/weapons/Sting_shape.tres" type="Shape" id=24]
+[ext_resource path="res://src/race/effects/Nitro2.tscn" type="PackedScene" id=25]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.81257, 0.276074, 2.09276 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.626899, 0.182928, 0.910737 )
+
+[node name="Car" type="RigidBody" groups=["cars"]]
+collision_layer = 114
+collision_mask = 2
+mass = 1700.0
+physics_material_override = ExtResource( 15 )
+gravity_scale = 0.0
+contacts_reported = 10
+contact_monitor = true
+can_sleep = false
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+script = ExtResource( 5 )
+condition = 170.0
+engine_power = 230.0
+lateral_resistance = 115.0
+heavy_resistance = 155.0
+handbrake_resistance = 55.0
+handbrake_heavy_resistance = 100.0
+handbrake_power = 13.0
+main_mat_index = 0
+light_mat_index = 1
+start_offset_y = -0.048
+wheel_mass_coef = 16.0
+bot_recovery_time_adjust = 0.9
+bot_stuck_velocity = 1.0
+
+[node name="Gun" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.534762, 0.0476372, 1.09525 )
+
+[node name="WeaponShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.535, 0.128, 1.19839 )
+visible = false
+shape = ExtResource( 24 )
+
+[node name="Gun2" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.535, 0.048, 1.09539 )
+
+[node name="WeaponShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.535, 0.128, 1.19839 )
+visible = false
+shape = ExtResource( 24 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -3.36578e-08, 0, -0.77, 0, 0.77, 0, 0.77, 0, -3.36578e-08, 0, -0.683156, -0.12737 )
+layers = 3
+mesh = ExtResource( 16 )
+material/0 = ExtResource( 13 )
+material/1 = ExtResource( 9 )
+material/2 = ExtResource( 7 )
+material/3 = ExtResource( 11 )
+material/4 = ExtResource( 10 )
+material/5 = ExtResource( 6 )
+material/6 = ExtResource( 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196405, -0.136519 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.240501, -0.285582 )
+visible = false
+shape = SubResource( 2 )
+
+[node name="Wheel" type="MeshInstance" parent="." groups=["wheels"]]
+transform = Transform( 0.77, 0, 0, 0, 0.77, 0, 0, 0, 0.77, 0.692386, -0.398988, 1.31936 )
+cast_shadow = 0
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 1 )
+script = ExtResource( 2 )
+steer = true
+carries_weight = true
+oppX_wheel = "Wheel2"
+ttsmoke = "TTSmoke"
+
+[node name="TTSmoke" parent="." instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.692475, -0.628612, 1.31982 )
+visible = false
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.692475, -0.400464, 1.31982 )
+visible = false
+shape = ExtResource( 23 )
+
+[node name="WheelArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.692475, -0.399191, 1.31982 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 18 )
+wheel_path = NodePath("../Wheel")
+
+[node name="CollisionShape" type="CollisionShape" parent="WheelArea"]
+visible = false
+shape = ExtResource( 23 )
+
+[node name="Wheel2" type="MeshInstance" parent="." groups=["wheels"]]
+transform = Transform( -0.77, 1.16267e-07, 0, -1.16267e-07, -0.77, 0, 0, 0, 0.77, -0.692, -0.398191, 1.3197 )
+cast_shadow = 0
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 1 )
+script = ExtResource( 2 )
+steer = true
+carries_weight = true
+oppX_wheel = "Wheel"
+ttsmoke = "TTSmoke2"
+
+[node name="TTSmoke2" parent="." instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692, -0.628191, 1.3197 )
+visible = false
+
+[node name="CollisionShape4" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692, -0.400191, 1.3197 )
+visible = false
+shape = ExtResource( 23 )
+
+[node name="WheelArea2" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692, -0.399191, 1.3197 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 18 )
+wheel_path = NodePath("../Wheel2")
+
+[node name="CollisionShape" type="CollisionShape" parent="WheelArea2"]
+visible = false
+shape = ExtResource( 23 )
+
+[node name="Wheel3" type="MeshInstance" parent="." groups=["wheels"]]
+transform = Transform( 0.77, 0, 0, 0, 0.77, 0, 0, 0, 0.77, 0.692059, -0.398988, -1.05284 )
+cast_shadow = 0
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 1 )
+script = ExtResource( 2 )
+drive = true
+oppX_wheel = "Wheel4"
+ttsmoke = "TTSmoke3"
+
+[node name="TTSmoke3" parent="." instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.692059, -0.628612, -1.05248 )
+visible = false
+
+[node name="CollisionShape5" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.692059, -0.400191, -1.05248 )
+visible = false
+shape = ExtResource( 23 )
+
+[node name="WheelArea3" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.692059, -0.399191, -1.05248 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 18 )
+wheel_path = NodePath("../Wheel3")
+
+[node name="CollisionShape" type="CollisionShape" parent="WheelArea3"]
+visible = false
+shape = ExtResource( 23 )
+
+[node name="Wheel4" type="MeshInstance" parent="." groups=["wheels"]]
+transform = Transform( -0.77, 1.16267e-07, 0, -1.16267e-07, -0.77, 0, 0, 0, 0.77, -0.692, -0.398673, -1.05272 )
+cast_shadow = 0
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 1 )
+script = ExtResource( 2 )
+drive = true
+oppX_wheel = "Wheel3"
+ttsmoke = "TTSmoke4"
+
+[node name="TTSmoke4" parent="." instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692, -0.628191, -1.05272 )
+visible = false
+
+[node name="CollisionShape6" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692, -0.400191, -1.05272 )
+visible = false
+shape = ExtResource( 23 )
+
+[node name="WheelArea4" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692, -0.399191, -1.05272 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 18 )
+wheel_path = NodePath("../Wheel4")
+
+[node name="CollisionShape" type="CollisionShape" parent="WheelArea4"]
+visible = false
+shape = ExtResource( 23 )
+
+[node name="Reflectors" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.206287, 0 )
+visible = false
+
+[node name="Light" parent="Reflectors" instance=ExtResource( 21 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.583493, 0, 1.90888 )
+
+[node name="Light2" parent="Reflectors" instance=ExtResource( 21 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.583, 0, 1.90888 )
+
+[node name="Nitro" parent="." instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4949, -0.382317, -2.19144 )
+visible = false
+
+[node name="Nitro2" parent="." instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4949, -0.382317, -2.19144 )
+visible = false
+
+[node name="MajorDamage" parent="." instance=ExtResource( 17 )]
+transform = Transform( 0.773, 0, 0, 0, 0.773, 0, 0, 0, 0.773, 0, 0.600729, 1.34012 )
+
+[node name="CriticalDamage" parent="." instance=ExtResource( 22 )]
+transform = Transform( 0.773, 0, 0, 0, 0.773, 0, 0, 0, 0.773, 0, 0.600729, 1.34012 )
+
+[node name="FinalDamage" parent="." instance=ExtResource( 14 )]
+transform = Transform( 0.598226, 0, 0, 0, 0.598226, 0, 0, 0, 0.598226, 0, 0.174234, 1.34 )
+
+[node name="MineSpawn" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.652, -2.52666 )
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="WheelArea" to="WheelArea" method="_on_area_entered"]
+[connection signal="area_exited" from="WheelArea" to="WheelArea" method="_on_area_exited"]
+[connection signal="area_entered" from="WheelArea2" to="WheelArea2" method="_on_area_entered"]
+[connection signal="area_exited" from="WheelArea2" to="WheelArea2" method="_on_area_exited"]
+[connection signal="area_entered" from="WheelArea3" to="WheelArea3" method="_on_area_entered"]
+[connection signal="area_exited" from="WheelArea3" to="WheelArea3" method="_on_area_exited"]
+[connection signal="area_entered" from="WheelArea4" to="WheelArea4" method="_on_area_entered"]
+[connection signal="area_exited" from="WheelArea4" to="WheelArea4" method="_on_area_exited"]

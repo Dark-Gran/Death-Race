@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/materials/roads/asphalt_fresh.tres" type="Material" id=2]
+[ext_resource path="res://src/race/HitArea.gd" type="Script" id=3]
+[ext_resource path="res://assets/objects/splatter1.obj" type="ArrayMesh" id=4]
+
+[sub_resource type="ConvexPolygonShape" id=1]
+points = PoolVector3Array( 2.30594, 0, -0.168382, -1.66805, 0, -2.16838, -0.71825, 0, -0.168382, 0.43727, 0, 2.40313, -1.66805, 0.258829, -2.16838, 2.30594, 0.258829, -0.168382, -0.71825, 0.258829, -0.168382, 0.43727, 0.258829, 2.40313, 2.30594, 0.258829, 2.40313, 2.30594, 0.258829, -2.16838, -1.66805, 0, -2.16838, 2.30594, 0, -2.16838, -0.71825, 0.258829, -0.168382, 0.43727, 0, 2.40313, -0.71825, 0, -0.168382, 2.30594, 0.258829, -0.168382, 2.30594, 0, -2.16838, 2.30594, 0, -0.168382, 2.30594, 0.258829, 2.40313, 2.30594, 0, 2.40313, 0.43727, 0.258829, 2.40313, 2.30594, 0, 2.40313, 0.43727, 0, 2.40313, 2.30594, 0, -2.16838, 2.30594, 0, 2.40313, 2.30594, 0.258829, -2.16838, -1.66805, 0.258829, -2.16838, 0.43727, 0.258829, 2.40313, 2.30594, 0.258829, -2.16838, 2.30594, 0.258829, 2.40313, -1.66805, 0.258829, -2.16838, -0.71825, 0, -0.168382, -1.66805, 0, -2.16838, -0.71825, 0.258829, -0.168382 )
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( -0.71825, 0, -0.168382, -3.33819, 0, -2.16838, -3.33819, 0, -0.168382, -3.33819, 0.258829, -2.16838, -0.71825, 0.258829, -0.168382, -3.33819, 0.258829, -0.168382, -1.66805, 0.258829, -2.16838, -3.33819, 0, -2.16838, -1.66805, 0, -2.16838, -3.33819, 0.258829, -0.168382, -0.71825, 0, -0.168382, -3.33819, 0, -0.168382, -3.33819, 0.258829, -2.16838, -3.33819, 0, -0.168382, -3.33819, 0, -2.16838, -1.66805, 0, -2.16838, -1.66805, 0.258829, -2.16838, -3.33819, 0.258829, -2.16838, -0.71825, 0.258829, -0.168382, -3.33819, 0.258829, -0.168382, -0.71825, 0, -0.168382, -1.66805, 0.258829, -2.16838, -1.66805, 0, -2.16838, -0.71825, 0.258829, -0.168382 )
+
+[node name="AsphaltSplatter" type="Area"]
+gravity = 1.0
+linear_damp = 0.01
+angular_damp = 0.01
+monitoring = false
+collision_layer = 2
+collision_mask = 0
+script = ExtResource( 3 )
+linear_friction = 0.075
+angular_friction = -0.025
+lateral_friction = -15.0
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+layers = 3
+material_override = ExtResource( 2 )
+use_in_baked_light = true
+mesh = ExtResource( 4 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+visible = false
+shape = SubResource( 2 )

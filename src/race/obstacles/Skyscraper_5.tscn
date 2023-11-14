@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/objects/skyscraper5.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/materials/skymetal_white_mild.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/window_skyglass.tres" type="Material" id=3]
+[ext_resource path="res://assets/materials/window_house.tres" type="Material" id=4]
+[ext_resource path="res://assets/materials/metal_truegrey.tres" type="Material" id=5]
+[ext_resource path="res://assets/materials/_physics/phx_basic.tres" type="PhysicsMaterial" id=6]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 4.03683, 25.8799, 3.99897 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.952058, 0.667528, 0.688556 )
+
+[node name="Skyscraper" type="StaticBody"]
+collision_layer = 11
+collision_mask = 0
+physics_material_override = ExtResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
+layers = 7
+use_in_baked_light = true
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 2 )
+material/1 = ExtResource( 3 )
+material/2 = ExtResource( 2 )
+material/3 = ExtResource( 4 )
+material/4 = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.0489807, -20.9575, 0.342875 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2.30315, 19.0079, 2.78497 )
+visible = false
+shape = SubResource( 2 )

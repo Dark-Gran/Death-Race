@@ -1,0 +1,168 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://assets/textures/mushroom_blur.png" type="Texture" id=1]
+[ext_resource path="res://src/race/pickups/PickupParticles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/animations/effectsUV2y-1.5to0.5.tres" type="Animation" id=3]
+[ext_resource path="res://assets/textures/mushroom_nm.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/little_white_64.png" type="Texture" id=5]
+[ext_resource path="res://src/race/Pickup.gd" type="Script" id=7]
+[ext_resource path="res://assets/textures/mushroom.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/pickupreflection.png" type="Texture" id=9]
+[ext_resource path="res://assets/textures/base_nm.png" type="Texture" id=10]
+
+[sub_resource type="SpatialMaterial" id=1]
+render_priority = 1
+flags_transparent = true
+albedo_color = Color( 0.45098, 0, 0.129412, 0.658824 )
+albedo_texture = ExtResource( 8 )
+normal_enabled = true
+normal_scale = 10.0
+normal_texture = ExtResource( 10 )
+uv2_scale = Vector3( 1, 1.37, 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+resource_local_to_scene = true
+next_pass = SubResource( 1 )
+flags_transparent = true
+albedo_color = Color( 0.45098, 0, 0.129412, 1 )
+albedo_texture = ExtResource( 8 )
+metallic = 0.5
+roughness = 0.5
+emission_enabled = true
+emission = Color( 1, 0, 0.282353, 1 )
+emission_energy = 5.5
+emission_operator = 1
+emission_on_uv2 = false
+emission_texture = ExtResource( 1 )
+normal_enabled = true
+normal_scale = 3.0
+normal_texture = ExtResource( 4 )
+detail_enabled = true
+detail_blend_mode = 0
+detail_uv_layer = 1
+detail_albedo = ExtResource( 9 )
+uv2_scale = Vector3( 1, 1.3, 1 )
+uv2_offset = Vector3( 0, -0.712, 0 )
+
+[sub_resource type="ArrayMesh" id=3]
+lightmap_size_hint = Vector2( 26, 26 )
+surfaces/0 = {
+"aabb": AABB( -0.250292, 0, -0.250292, 0.500594, 1e-05, 0.500594 ),
+"array_data": PoolByteArray( 70, 38, 128, 62, 0, 0, 0, 0, 70, 38, 128, 62, 0, 127, 0, 0, 127, 0, 0, 127, 0, 60, 0, 60, 216, 59, 216, 59, 70, 38, 128, 190, 0, 0, 0, 0, 70, 38, 128, 62, 0, 127, 0, 0, 127, 0, 0, 127, 0, 0, 0, 60, 236, 36, 216, 59, 70, 38, 128, 62, 0, 0, 0, 0, 70, 38, 128, 190, 0, 127, 0, 0, 127, 0, 0, 127, 0, 60, 0, 0, 216, 59, 236, 36, 70, 38, 128, 190, 0, 0, 0, 0, 70, 38, 128, 190, 0, 127, 0, 0, 127, 0, 0, 127, 0, 0, 0, 0, 236, 36, 236, 36 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 2, 0, 2, 0, 1, 0, 3, 0 ),
+"blend_shape_data": [  ],
+"format": 97591,
+"index_count": 6,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.394161, 0.500814, 0.329665 )
+
+[sub_resource type="SpatialMaterial" id=5]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 1
+params_billboard_keep_scale = true
+albedo_color = Color( 1, 0.219608, 0.219608, 1 )
+albedo_texture = ExtResource( 5 )
+emission_enabled = true
+emission = Color( 1, 0.219608, 0.219608, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="ArrayMesh" id=6]
+surfaces/0 = {
+"aabb": AABB( -0.250292, -0.250292, 0, 0.500594, 0.500584, 1e-05 ),
+"array_data": PoolByteArray( 70, 38, 128, 62, 70, 38, 128, 190, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 60, 0, 60, 70, 38, 128, 190, 70, 38, 128, 190, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 60, 70, 38, 128, 62, 70, 38, 128, 62, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 60, 0, 0, 70, 38, 128, 190, 70, 38, 128, 62, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 2, 0, 2, 0, 1, 0, 3, 0 ),
+"blend_shape_data": [  ],
+"format": 97559,
+"index_count": 6,
+"material": SubResource( 5 ),
+"name": "Material",
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+
+[sub_resource type="Animation" id=7]
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance:material_override:next_pass:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.45098, 0, 0.129412, 0.658824 ), Color( 0.45, 0, 0.1275, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MeshInstance:material_override:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.45098, 0, 0.129412, 1 ), Color( 0.45098, 0, 0.129412, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance:material_override:uv2_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.712, 0 ) ]
+}
+
+[node name="Pickup" type="Area" groups=["pickups"]]
+collision_layer = 10
+collision_mask = 2
+script = ExtResource( 7 )
+type = 4
+power = 6.0
+pickedup_effect = "res://src/race/pickups/PickedUp_Red.tscn"
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 2.11198, 0, 0, 0, 2.11198, 0, 0, 0, 2.11198, 0, 0.3, 0 )
+material_override = SubResource( 2 )
+cast_shadow = 0
+mesh = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.0133686 )
+visible = false
+shape = SubResource( 4 )
+
+[node name="PickupParticles" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
+draw_pass_1 = SubResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "effectsUV2y-1"
+playback_speed = 0.25
+anims/FadeAway = SubResource( 7 )
+anims/RESET = SubResource( 8 )
+anims/effectsUV2y-1 = ExtResource( 3 )
+
+[node name="QueueFreeTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="QueueFreeTimer" to="." method="queue_free"]

@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/objects/skyscraper_cafe.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/materials/skymetal_white_mild.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/metal_truegrey_uv.tres" type="Material" id=3]
+[ext_resource path="res://assets/materials/window_house.tres" type="Material" id=4]
+[ext_resource path="res://assets/materials/_physics/phx_basic.tres" type="PhysicsMaterial" id=6]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 8.30329, 44.9453, 8.41112 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 5.41061, 37.469, 8.43784 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.176687, 5.96496, 0.19465 )
+
+[node name="Skycafe" type="StaticBody"]
+collision_layer = 11
+collision_mask = 0
+physics_material_override = ExtResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+layers = 3
+use_in_baked_light = true
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 4 )
+material/1 = ExtResource( 2 )
+material/2 = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.995629, 0, -0.0933959, 0, 1, 0, 0.0933959, 0, 0.995629, -24.9726, -30.0713, -9.50586 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 0.995629, 0, -0.0933959, 0, 1, 0, 0.0933959, 0, 0.995629, -25.9122, -37.9978, -26.4591 )
+visible = false
+shape = SubResource( 2 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0253, 20.8097, -14.2549 )
+visible = false
+shape = SubResource( 3 )

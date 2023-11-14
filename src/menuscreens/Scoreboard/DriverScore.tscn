@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/gui/gui_driver_blank.png" type="Texture" id=1]
+[ext_resource path="res://assets/fonts/mainfont_34.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/portraits/p50/00.png" type="Texture" id=3]
+
+[node name="DriverScore" type="HBoxContainer"]
+margin_right = 514.0
+margin_bottom = 67.0
+rect_pivot_offset = Vector2( 102.884, -94.1947 )
+size_flags_vertical = 0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PortraitRing" type="TextureRect" parent="."]
+margin_right = 67.0
+margin_bottom = 67.0
+rect_pivot_offset = Vector2( -263.4, -163.962 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Portrait" type="TextureRect" parent="PortraitRing"]
+show_behind_parent = true
+margin_left = 9.0
+margin_top = 8.0
+margin_right = 59.0
+margin_bottom = 58.0
+rect_pivot_offset = Vector2( -263.4, -163.962 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="."]
+margin_left = 77.0
+margin_top = 13.0
+margin_right = 321.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 2 )
+text = "Name Surname  "
+
+[node name="Score" type="Label" parent="."]
+margin_left = 331.0
+margin_top = 13.0
+margin_right = 467.0
+margin_bottom = 54.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "0"
+align = 2
+
+[node name="ScoreChange" type="Label" parent="."]
+margin_left = 477.0
+margin_top = 13.0
+margin_right = 514.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 2 )
+text = "+0"
+align = 2

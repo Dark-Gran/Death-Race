@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/objects/pneu.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/materials/tyre.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/_physics/phx_rubber.tres" type="PhysicsMaterial" id=3]
+
+[sub_resource type="CylinderShape" id=1]
+radius = 0.983995
+height = 0.629438
+
+[node name="Pneu" type="RigidBody"]
+collision_layer = 15
+collision_mask = 15
+mass = 6.0
+physics_material_override = ExtResource( 3 )
+sleeping = true
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.304, 0, 0, 0, 0.304, 0, 0, 0, 0.304, 0, 0, 0 )
+material_override = ExtResource( 2 )
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.304, 0, 0, 0, 0.304, 0, 0, 0, 0.304, 0, 0, 0 )
+visible = false
+shape = SubResource( 1 )

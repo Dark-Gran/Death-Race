@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/objects/tree2.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/materials/wood_grey.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/_physics/phx_basic.tres" type="PhysicsMaterial" id=3]
+[ext_resource path="res://assets/materials/leaves_red.tres" type="Material" id=4]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.261868, 0.723791, 0.251555 )
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.998843
+height = 1.00895
+
+[node name="Tree" type="StaticBody"]
+collision_layer = 11
+collision_mask = 0
+physics_material_override = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0 )
+layers = 3
+use_in_baked_light = true
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 2 )
+material/1 = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( -0.425868, 0, -2.46346, 0, 2.5, 0, 2.46346, 0, -0.425868, 0.0441181, 1.59458, 0.0493472 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( -0.419616, 0, 1.85308, 0, 1.9, 0, -1.85308, 0, -0.419616, -0.0792021, 5.42351, -0.0902312 )
+visible = false
+shape = SubResource( 2 )

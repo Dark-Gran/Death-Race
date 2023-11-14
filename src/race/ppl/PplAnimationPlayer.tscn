@@ -1,0 +1,20 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/ppl/bum_0 -loop.anim" type="Animation" id=1]
+[ext_resource path="res://assets/ppl/cheer_0 -loop.anim" type="Animation" id=2]
+[ext_resource path="res://assets/ppl/wounded -loop.anim" type="Animation" id=3]
+[ext_resource path="res://assets/ppl/dance_woman_0 -loop.anim" type="Animation" id=4]
+[ext_resource path="res://assets/ppl/cheer_1 -loop.anim" type="Animation" id=5]
+[ext_resource path="res://assets/ppl/stand_0 -loop.anim" type="Animation" id=6]
+[ext_resource path="res://assets/ppl/_rest.anim" type="Animation" id=7]
+[ext_resource path="res://assets/ppl/sit_cigarette -loop.anim" type="Animation" id=8]
+
+[node name="AnimationPlayer" type="AnimationPlayer"]
+anims/_rest = ExtResource( 7 )
+"anims/bum_0 -loop" = ExtResource( 1 )
+"anims/cheer_0 -loop" = ExtResource( 2 )
+"anims/cheer_1 -loop" = ExtResource( 5 )
+"anims/dance_woman_0 -loop" = ExtResource( 4 )
+"anims/sit_cigarette -loop" = ExtResource( 8 )
+"anims/stand_0 -loop" = ExtResource( 6 )
+"anims/wounded -loop" = ExtResource( 3 )

@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/textures/ammo_blur.png" type="Texture" id=1]
+[ext_resource path="res://src/race/pickups/PickupParticles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/animations/effectsUV2y-1.5to0.5.tres" type="Animation" id=3]
+[ext_resource path="res://assets/animations/RedAlpha1to0.tres" type="Animation" id=4]
+[ext_resource path="res://assets/textures/ammo_nm.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/pickupreflection.png" type="Texture" id=6]
+[ext_resource path="res://src/race/Pickup.gd" type="Script" id=7]
+[ext_resource path="res://assets/textures/ammo.png" type="Texture" id=8]
+
+[sub_resource type="SpatialMaterial" id=1]
+resource_local_to_scene = true
+flags_transparent = true
+albedo_color = Color( 0.34902, 0, 0.027451, 1 )
+albedo_texture = ExtResource( 8 )
+metallic = 1.0
+emission_enabled = true
+emission = Color( 1, 0.184314, 0, 1 )
+emission_energy = 9.0
+emission_operator = 1
+emission_on_uv2 = false
+emission_texture = ExtResource( 1 )
+normal_enabled = true
+normal_scale = 4.0
+normal_texture = ExtResource( 5 )
+detail_enabled = true
+detail_blend_mode = 0
+detail_uv_layer = 1
+detail_albedo = ExtResource( 6 )
+uv2_scale = Vector3( 1, 1.229, 1 )
+uv2_offset = Vector3( 0, 0.31, 0 )
+
+[sub_resource type="ArrayMesh" id=2]
+lightmap_size_hint = Vector2( 26, 26 )
+surfaces/0 = {
+"aabb": AABB( -0.250292, 0, -0.250292, 0.500594, 1e-05, 0.500594 ),
+"array_data": PoolByteArray( 70, 38, 128, 62, 0, 0, 0, 0, 70, 38, 128, 62, 0, 127, 0, 0, 127, 0, 0, 127, 0, 60, 0, 60, 216, 59, 216, 59, 70, 38, 128, 190, 0, 0, 0, 0, 70, 38, 128, 62, 0, 127, 0, 0, 127, 0, 0, 127, 0, 0, 0, 60, 236, 36, 216, 59, 70, 38, 128, 62, 0, 0, 0, 0, 70, 38, 128, 190, 0, 127, 0, 0, 127, 0, 0, 127, 0, 60, 0, 0, 216, 59, 236, 36, 70, 38, 128, 190, 0, 0, 0, 0, 70, 38, 128, 190, 0, 127, 0, 0, 127, 0, 0, 127, 0, 0, 0, 0, 236, 36, 236, 36 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 2, 0, 2, 0, 1, 0, 3, 0 ),
+"blend_shape_data": [  ],
+"format": 97591,
+"index_count": 6,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.381383, 0.500814, 0.396266 )
+
+[node name="Pickup" type="Area" groups=["pickups"]]
+collision_layer = 10
+collision_mask = 2
+script = ExtResource( 7 )
+type = 2
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0.3, 0 )
+material_override = SubResource( 1 )
+cast_shadow = 0
+mesh = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+visible = false
+shape = SubResource( 3 )
+
+[node name="PickupParticles" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "effectsUV2y-1"
+playback_speed = 0.25
+anims/FadeAway = ExtResource( 4 )
+anims/effectsUV2y-1 = ExtResource( 3 )
+
+[node name="QueueFreeTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="QueueFreeTimer" to="." method="queue_free"]

@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/race/ParticleShaderTime.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/little_white_64.png" type="Texture" id=2]
+[ext_resource path="res://assets/materials/effects/ColorRamp_Alpha1to0.tres" type="Texture" id=3]
+[ext_resource path="res://assets/materials/effects/EmissionFade.gdshader" type="Shader" id=4]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 1
+emission_sphere_radius = 0.2
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.5
+tangential_accel = 0.5
+damping = 0.6
+scale = 0.3
+color_ramp = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 4 )
+shader_param/albedo = Color( 1, 0.74902, 0.501961, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/emission = Color( 0.5, 0.375, 0.25, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/billboard = true
+shader_param/apply_scale = true
+shader_param/time = null
+shader_param/e_fade = 0.3
+shader_param/texture_albedo = ExtResource( 2 )
+
+[sub_resource type="ArrayMesh" id=3]
+surfaces/0 = {
+"aabb": AABB( -0.250292, -0.250292, 0, 0.500594, 0.500584, 1e-05 ),
+"array_data": PoolByteArray( 70, 38, 128, 62, 70, 38, 128, 190, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 60, 0, 60, 70, 38, 128, 190, 70, 38, 128, 190, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 60, 70, 38, 128, 62, 70, 38, 128, 62, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 60, 0, 0, 70, 38, 128, 190, 70, 38, 128, 62, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 2, 0, 2, 0, 1, 0, 3, 0 ),
+"blend_shape_data": [  ],
+"format": 97559,
+"index_count": 6,
+"material": SubResource( 2 ),
+"name": "Material",
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+
+[node name="PickedUp" type="Particles" groups=[
+"oneshot_emitters",
+]]
+cast_shadow = 0
+emitting = false
+amount = 10
+one_shot = true
+speed_scale = 0.6
+explosiveness = 1.0
+visibility_aabb = AABB( -25, -4, -25, 50, 8, 50 )
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 3 )
+script = ExtResource( 1 )
+imported_mesh = true

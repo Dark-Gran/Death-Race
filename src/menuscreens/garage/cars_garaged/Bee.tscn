@@ -1,0 +1,99 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://assets/materials/metal_grey_nooutline.tres" type="Material" id=1]
+[ext_resource path="res://assets/materials/metal_grey_tightest.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/tyre.tres" type="Material" id=3]
+[ext_resource path="res://assets/cars/multipla_wheel.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://assets/materials/plastic_cyan.tres" type="Material" id=5]
+[ext_resource path="res://assets/materials/plastic_black.tres" type="Material" id=6]
+[ext_resource path="res://assets/materials/car_blinkers.tres" type="Material" id=7]
+[ext_resource path="res://assets/materials/car_base_tight.tres" type="Material" id=8]
+[ext_resource path="res://assets/materials/light_carOff.tres" type="Material" id=9]
+[ext_resource path="res://assets/materials/window_car_tight.tres" type="Material" id=10]
+[ext_resource path="res://src/race/cars/CarLight.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/materials/metal_silver_tightest.tres" type="Material" id=12]
+[ext_resource path="res://src/race/effects/CarSmoke2.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/race/effects/FinalDamage.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/materials/metal_black_tightest.tres" type="Material" id=15]
+[ext_resource path="res://assets/weapons/basegun.obj" type="ArrayMesh" id=16]
+[ext_resource path="res://src/race/effects/CarSmoke1.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/menuscreens/garage/GaragedCar.gd" type="Script" id=18]
+[ext_resource path="res://src/race/effects/Nitro.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/cars/multipla.obj" type="ArrayMesh" id=21]
+
+[node name="Car" type="Spatial" groups=["garaged_cars"]]
+script = ExtResource( 18 )
+main_mat_index = 0
+light_mat_index = 4
+
+[node name="Gun" type="MeshInstance" parent="." groups=["garaged_guns"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.43, 0.00218634, 1.36003 )
+mesh = ExtResource( 16 )
+material/0 = ExtResource( 15 )
+material/1 = ExtResource( 5 )
+material/2 = ExtResource( 2 )
+material/3 = ExtResource( 6 )
+material/4 = ExtResource( 2 )
+material/5 = ExtResource( 12 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -5.04867e-08, 0, -1.155, 0, 1.155, 0, 1.155, 0, -5.04867e-08, 0, -0.782346, 1.11757 )
+layers = 3
+mesh = ExtResource( 21 )
+material/0 = ExtResource( 8 )
+material/1 = ExtResource( 7 )
+material/2 = ExtResource( 7 )
+material/3 = ExtResource( 10 )
+material/4 = ExtResource( 9 )
+material/5 = ExtResource( 6 )
+
+[node name="Wheel" type="MeshInstance" parent="."]
+transform = Transform( 1.155, 0, 0, 0, 1.155, 0, 0, 0, 1.155, 0.799705, -0.486507, 1.17773 )
+cast_shadow = 0
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 1 )
+
+[node name="Wheel2" type="MeshInstance" parent="."]
+transform = Transform( -1.155, 1.744e-07, 0, -1.744e-07, -1.155, 0, 0, 0, 1.155, -0.8, -0.48571, 1.17807 )
+cast_shadow = 0
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 1 )
+
+[node name="Wheel3" type="MeshInstance" parent="."]
+transform = Transform( 1.155, 0, 0, 0, 1.155, 0, 0, 0, 1.155, 0.8, -0.486507, -1.22105 )
+cast_shadow = 0
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 1 )
+
+[node name="Wheel4" type="MeshInstance" parent="."]
+transform = Transform( -1.155, 1.744e-07, 0, -1.744e-07, -1.155, 0, 0, 0, 1.155, -0.8, -0.486192, -1.22093 )
+cast_shadow = 0
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 1 )
+
+[node name="Reflectors" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.265673, 0.66566 )
+visible = false
+
+[node name="Light" parent="Reflectors" instance=ExtResource( 11 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.533, 0.098, 1.10793 )
+
+[node name="Light2" parent="Reflectors" instance=ExtResource( 11 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.533, 0.098, 1.10793 )
+
+[node name="Nitro" parent="." instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.456634, -0.559705, -1.6675 )
+visible = false
+
+[node name="MajorDamage" parent="." instance=ExtResource( 17 )]
+transform = Transform( 0.773, 0, 0, 0, 0.773, 0, 0, 0, 0.773, 0, 0.0994599, 1.47894 )
+
+[node name="CriticalDamage" parent="." instance=ExtResource( 13 )]
+transform = Transform( 0.773, 0, 0, 0, 0.773, 0, 0, 0, 0.773, 0, 0.0994599, 1.47894 )
+
+[node name="FinalDamage" parent="." instance=ExtResource( 14 )]
+transform = Transform( 0.598226, 0, 0, 0, 0.598226, 0, 0, 0, 0.598226, 0, 0.081011, 1.46994 )

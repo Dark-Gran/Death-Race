@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/objects/parkfence2_brokencorner.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/materials/outlines/outline_tightest.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/_physics/phx_basic.tres" type="PhysicsMaterial" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+next_pass = ExtResource( 2 )
+albedo_color = Color( 0.164706, 0.211765, 0.219608, 1 )
+metallic = 1.0
+roughness = 0.7
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.0718483, 1.1715, 2.22399 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.0718483, 1.1715, 1.36662 )
+
+[node name="ParkFenceCorner" type="StaticBody"]
+collision_layer = 11
+collision_mask = 0
+physics_material_override = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
+material_override = SubResource( 1 )
+use_in_baked_light = true
+mesh = ExtResource( 1 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.992097, -0.125472, 0, 0.125472, 0.992097, 0, 0, 0, 1, 1.70597, 1.16551, 4.14152 )
+visible = false
+shape = SubResource( 2 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 0.0866912, -0.0109639, 0.996175, 0.271546, 0.962337, -0.0130395, -0.958513, 0.271638, 0.0864034, -3.0907, 1.16551, -0.332989 )
+visible = false
+shape = SubResource( 2 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 0.92334, -0.20575, 0.324207, 0.227731, 0.973232, -0.0309387, -0.309163, 0.102399, 0.94548, 1.283, 1.16551, 0.685268 )
+visible = false
+shape = SubResource( 3 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="."]
+transform = Transform( -0.497834, -0.102359, 0.861211, -0.149609, 0.98826, 0.0309761, -0.854271, -0.113424, -0.507303, -0.313112, 0.928413, 0.0717866 )
+visible = false
+shape = SubResource( 3 )

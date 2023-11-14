@@ -1,0 +1,62 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/materials/tyre.tres" type="Material" id=1]
+[ext_resource path="res://assets/materials/car_brakelights.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/_physics/phx_basic.tres" type="PhysicsMaterial" id=3]
+[ext_resource path="res://assets/materials/metal_blue_boldest.tres" type="Material" id=4]
+[ext_resource path="res://assets/objects/rozbitacisterna.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://assets/materials/metal_truegrey_tight.tres" type="Material" id=6]
+[ext_resource path="res://assets/materials/metal_grey_tight.tres" type="Material" id=7]
+[ext_resource path="res://assets/materials/metal_darkgrey_tightest.tres" type="Material" id=8]
+[ext_resource path="res://assets/materials/metal_grey_nooutline.tres" type="Material" id=9]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.976832, 0.860593, 1.38809 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1.89762, 0.621313, 0.268381 )
+
+[sub_resource type="CapsuleShape" id=3]
+radius = 1.04375
+height = 7.2544
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.118122, 0.623874, 0.436169 )
+
+[node name="CisternCrashed" type="StaticBody"]
+collision_layer = 11
+collision_mask = 0
+physics_material_override = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.595, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 0, 0, 0 )
+use_in_baked_light = true
+mesh = ExtResource( 5 )
+material/0 = ExtResource( 6 )
+material/1 = ExtResource( 7 )
+material/2 = ExtResource( 4 )
+material/3 = ExtResource( 1 )
+material/4 = ExtResource( 9 )
+material/5 = ExtResource( 7 )
+material/6 = ExtResource( 2 )
+material/7 = ExtResource( 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.84325, 0.797764, -0.434021 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.164479, 0.841211, -1.06264 )
+visible = false
+shape = SubResource( 2 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( -0.0146428, 0, 0.999893, 0, 1, 0, -0.999893, 0, -0.0146428, -0.344219, 0.979783, -0.0332851 )
+visible = false
+shape = SubResource( 3 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.81141, 0.841551, -1.14254 )
+visible = false
+shape = SubResource( 4 )

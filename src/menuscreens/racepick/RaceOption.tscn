@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/fonts/mainfont_42.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/gui/black_rect.png" type="Texture" id=2]
+[ext_resource path="res://src/menuscreens/racepick/RaceOption.gd" type="Script" id=3]
+
+[node name="RaceOption" type="VBoxContainer"]
+margin_left = 685.0
+margin_right = 1135.0
+margin_bottom = 839.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tier" type="Label" parent="."]
+margin_right = 450.0
+margin_bottom = 51.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 1 )
+text = "Tier"
+align = 1
+
+[node name="Focus" type="ColorRect" parent="Tier"]
+visible = false
+show_behind_parent = true
+margin_left = -2.0
+margin_top = 53.0
+margin_right = 452.0
+margin_bottom = 357.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pic" type="TextureRect" parent="."]
+margin_top = 55.0
+margin_right = 450.0
+margin_bottom = 355.0
+texture = ExtResource( 2 )
+
+[node name="Name" type="Label" parent="."]
+margin_top = 359.0
+margin_right = 450.0
+margin_bottom = 410.0
+custom_fonts/font = ExtResource( 1 )
+text = "::: Map: Weather :::"
+align = 1
+
+[node name="List" type="VBoxContainer" parent="."]
+margin_top = 414.0
+margin_right = 450.0
+margin_bottom = 414.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

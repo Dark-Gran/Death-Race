@@ -1,0 +1,78 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://assets/materials/tyre.tres" type="Material" id=1]
+[ext_resource path="res://assets/materials/car_brakelights.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/_physics/phx_basic.tres" type="PhysicsMaterial" id=3]
+[ext_resource path="res://assets/materials/metal_blue.tres" type="Material" id=4]
+[ext_resource path="res://assets/materials/metal_grey_tight.tres" type="Material" id=5]
+[ext_resource path="res://assets/materials/metal_truegrey_tight.tres" type="Material" id=6]
+[ext_resource path="res://assets/materials/metal_red.tres" type="Material" id=7]
+[ext_resource path="res://assets/materials/plastic_black.tres" type="Material" id=8]
+[ext_resource path="res://assets/materials/window_car.tres" type="Material" id=9]
+[ext_resource path="res://assets/objects/nakladak.obj" type="ArrayMesh" id=10]
+[ext_resource path="res://assets/materials/metal_grey_nooutline.tres" type="Material" id=11]
+
+[sub_resource type="ConvexPolygonShape" id=1]
+points = PoolVector3Array( -1.7047, 1.30879, -2.02839, -1.7047, 1.30879, 0.570384, -1.7047, 2.12082, -2.02839, -1.7047, 2.12082, 0.570384, -1.62348, 2.12082, -2.02839, -1.62348, 2.12082, 0.570384, -1.54226, 1.30879, -2.02839, -1.54226, 1.30879, 0.570384, -1.54226, 1.47119, -2.02839, -1.54226, 1.47119, 0.570384 )
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( 0.00123072, 1.30879, -5.19651, 0.00123072, 1.30879, -5.03409, 0.00123072, 1.47119, -5.03409, 0.00123072, 2.12082, -5.19651, 0.00123072, 2.12082, -5.11529, 1.70684, 1.30879, -5.19651, 1.70684, 1.30879, -5.03409, 1.70684, 2.12082, -5.19651, 1.70684, 2.12082, -5.03409 )
+
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( -1.61418, 2.02681, 0.7616, -1.54226, 2.12151, 1.46408, -1.54226, 2.20152, 0.895612, -1.54226, 2.20152, 1.46408, -1.46047, 2.03996, 1.78905, -1.424, 0.618238, 0.826832, -1.424, 0.618238, 1.77654, -1.31241, 2.03858, 1.7946, -1.0545, 2.68898, 0.895612, -0.00301989, 3.58675, 1.00936, 0.00104778, 3.74545, 1.46408, 0.220494, 3.6109, 1.00441, 0.244635, 3.74545, 1.46408, 0.407026, 3.58296, 1.46408, 1.17549, 2.02681, 0.7616, 1.424, 0.618854, 0.827021, 1.424, 0.618854, 1.77635, 1.46316, 1.95903, 1.78905, 1.62572, 1.93712, 0.7616 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.972593, 1, 0.912024 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 1.02921, 0.438971, 2.15676 )
+
+[node name="Larry" type="StaticBody"]
+collision_layer = 11
+collision_mask = 0
+physics_material_override = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
+use_in_baked_light = true
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 11 )
+material/1 = ExtResource( 4 )
+material/2 = ExtResource( 8 )
+material/3 = ExtResource( 1 )
+material/4 = ExtResource( 6 )
+material/5 = ExtResource( 7 )
+material/6 = ExtResource( 2 )
+material/7 = ExtResource( 8 )
+material/8 = ExtResource( 5 )
+material/9 = ExtResource( 9 )
+
+[node name="CollisionShape6" type="CollisionShape" parent="."]
+transform = Transform( 0.52, 0, 0, 0, 0.643, 0, 0, 0, 1.452, -0.197425, 0, -0.309229 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="."]
+transform = Transform( -0.584, 0, -2.19246e-07, 0, 0.643, 0, 8.81815e-08, 0, -1.452, 0.0824887, 0, -2.48834 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="."]
+transform = Transform( 1.219, 0, 0, 0, 0.643, 0, 0, 0, 0.643, -1.0649, 0, 0 )
+visible = false
+shape = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.643, 0, 0, 0, 0.643, 0, 0, 0, 0.742, 0.0132544, 0.0117159, -0.0486854 )
+visible = false
+shape = SubResource( 3 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.007, 2.09379 )
+visible = false
+shape = SubResource( 4 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43599, -0.980977 )
+visible = false
+shape = SubResource( 5 )

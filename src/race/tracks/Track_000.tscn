@@ -1,0 +1,663 @@
+[gd_scene load_steps=35 format=2]
+
+[ext_resource path="res://src/race/Track.gd" type="Script" id=1]
+[ext_resource path="res://assets/roads/track_003/track_003_tt3.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/roads/track_003/track_003_tt2.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/env/night_orange_editor.tres" type="Environment" id=4]
+[ext_resource path="res://assets/materials/_physics/phx_dirt.tres" type="PhysicsMaterial" id=10]
+[ext_resource path="res://src/race/tracks/Botpoint.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/race/tracks/Checkpoint.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/roads/track_003/track_003_tt1.obj" type="ArrayMesh" id=23]
+[ext_resource path="res://assets/roads/track_003/track_003_tt0.obj" type="ArrayMesh" id=25]
+[ext_resource path="res://src/race/cars/Hunter.tscn" type="PackedScene" id=44]
+[ext_resource path="res://assets/materials/effects/EmissionFade.gdshader" type="Shader" id=89]
+[ext_resource path="res://src/race/pickups/Cash.tscn" type="PackedScene" id=90]
+[ext_resource path="res://assets/textures/little_white_64.png" type="Texture" id=93]
+[ext_resource path="res://assets/materials/effects/ColorRamp_Alpha1to0.tres" type="Texture" id=94]
+[ext_resource path="res://src/race/effects/BulletImpact.tscn" type="PackedScene" id=95]
+[ext_resource path="res://src/race/effects/Blood.tscn" type="PackedScene" id=96]
+[ext_resource path="res://assets/materials/effects/Blood.tres" type="Material" id=97]
+[ext_resource path="res://src/race/pickups/Mushroom.tscn" type="PackedScene" id=100]
+[ext_resource path="res://src/race/pickups/Repair.tscn" type="PackedScene" id=101]
+[ext_resource path="res://src/race/pickups/Nitro.tscn" type="PackedScene" id=102]
+[ext_resource path="res://src/race/pickups/Ammo.tscn" type="PackedScene" id=103]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 107.957, 47.686, 1.88677 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 110.145, 1, 100.149 )
+
+[sub_resource type="SpatialMaterial" id=3]
+render_priority = -1
+flags_transparent = true
+metallic = 0.5
+roughness = 0.95
+
+[sub_resource type="SpatialMaterial" id=4]
+render_priority = -1
+flags_transparent = true
+metallic = 0.5
+roughness = 0.95
+
+[sub_resource type="SpatialMaterial" id=5]
+render_priority = -1
+flags_transparent = true
+metallic = 0.5
+roughness = 0.95
+
+[sub_resource type="SpatialMaterial" id=6]
+render_priority = -1
+flags_transparent = true
+metallic = 0.5
+roughness = 0.95
+
+[sub_resource type="Shader" id=7]
+code = "shader_type particles;
+uniform vec3 direction;
+uniform float spread;
+uniform float flatness;
+uniform float initial_linear_velocity;
+uniform float initial_angle;
+uniform float angular_velocity;
+uniform float orbit_velocity;
+uniform float linear_accel;
+uniform float radial_accel;
+uniform float tangent_accel;
+uniform float damping;
+uniform float scale;
+uniform float hue_variation;
+uniform float anim_speed;
+uniform float anim_offset;
+uniform float initial_linear_velocity_random;
+uniform float initial_angle_random;
+uniform float angular_velocity_random;
+uniform float orbit_velocity_random;
+uniform float linear_accel_random;
+uniform float radial_accel_random;
+uniform float tangent_accel_random;
+uniform float damping_random;
+uniform float scale_random;
+uniform float hue_variation_random;
+uniform float anim_speed_random;
+uniform float anim_offset_random;
+uniform float lifetime_randomness;
+uniform vec4 color_value : hint_color;
+uniform int trail_divisor;
+uniform vec3 gravity;
+uniform sampler2D color_ramp;
+
+float rand_from_seed(inout uint seed) {
+	int k;
+	int s = int(seed);
+	if (s == 0)
+	s = 305420679;
+	k = s / 127773;
+	s = 16807 * (s - k * 127773) - 2836 * k;
+	if (s < 0)
+		s += 2147483647;
+	seed = uint(s);
+	return float(seed % uint(65536)) / 65535.0;
+}
+
+float rand_from_seed_m1_p1(inout uint seed) {
+	return rand_from_seed(seed) * 2.0 - 1.0;
+}
+
+uint hash(uint x) {
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = (x >> uint(16)) ^ x;
+	return x;
+}
+
+void vertex() {
+	uint base_number = NUMBER / uint(trail_divisor);
+	uint alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	float angle_rand = rand_from_seed(alt_seed);
+	float scale_rand = rand_from_seed(alt_seed);
+	float hue_rot_rand = rand_from_seed(alt_seed);
+	float anim_offset_rand = rand_from_seed(alt_seed);
+	float pi = 3.14159;
+	float degree_to_rad = pi / 180.0;
+
+	bool restart = false;
+	float tv = 0.0;
+	if (CUSTOM.y > CUSTOM.w) {
+		restart = true;
+		tv = 1.0;
+	}
+
+	if (RESTART || restart) {
+		float tex_linear_velocity = 0.0;
+		float tex_angle = 0.0;
+		float tex_anim_offset = 0.0;
+		float spread_rad = spread * degree_to_rad;
+		float angle1_rad = rand_from_seed_m1_p1(alt_seed) * spread_rad;
+		float angle2_rad = rand_from_seed_m1_p1(alt_seed) * spread_rad * (1.0 - flatness);
+		angle1_rad += direction.z != 0.0 ? atan(direction.x, direction.z) : sign(direction.x) * (pi / 2.0);
+		angle2_rad += direction.z != 0.0 ? atan(direction.y, abs(direction.z)) : (direction.x != 0.0 ? atan(direction.y, abs(direction.x)) : sign(direction.y) * (pi / 2.0));
+		vec3 direction_xz = vec3(sin(angle1_rad), 0.0, cos(angle1_rad));
+		vec3 direction_yz = vec3(0.0, sin(angle2_rad), cos(angle2_rad));
+		direction_yz.z = direction_yz.z / max(0.0001,sqrt(abs(direction_yz.z))); // better uniform distribution
+		vec3 vec_direction = vec3(direction_xz.x * direction_yz.z, direction_yz.y, direction_xz.z * direction_yz.z);
+		vec_direction = normalize(vec_direction);
+		VELOCITY = vec_direction * initial_linear_velocity * mix(1.0, rand_from_seed(alt_seed), initial_linear_velocity_random);
+		float base_angle = (initial_angle + tex_angle) * mix(1.0, angle_rand, initial_angle_random);
+		CUSTOM.x = base_angle * degree_to_rad;
+		CUSTOM.y = 0.0;
+		CUSTOM.w = (1.0 - lifetime_randomness * rand_from_seed(alt_seed));
+		CUSTOM.z = (anim_offset + tex_anim_offset) * mix(1.0, anim_offset_rand, anim_offset_random);
+		VELOCITY = (EMISSION_TRANSFORM * vec4(VELOCITY, 0.0)).xyz;
+		TRANSFORM = EMISSION_TRANSFORM * TRANSFORM;
+	} else {
+		CUSTOM.y += DELTA / LIFETIME;
+		tv = CUSTOM.y / CUSTOM.w;
+		float tex_linear_velocity = 0.0;
+		float tex_angular_velocity = 0.0;
+		float tex_linear_accel = 0.0;
+		float tex_radial_accel = 0.0;
+		float tex_tangent_accel = 0.0;
+		float tex_damping = 0.0;
+		float tex_angle = 0.0;
+		float tex_anim_speed = 0.0;
+		float tex_anim_offset = 0.0;
+		vec3 force = gravity;
+		vec3 pos = TRANSFORM[3].xyz;
+		// apply linear acceleration
+		force += length(VELOCITY) > 0.0 ? normalize(VELOCITY) * (linear_accel + tex_linear_accel) * mix(1.0, rand_from_seed(alt_seed), linear_accel_random) : vec3(0.0);
+		// apply radial acceleration
+		vec3 org = EMISSION_TRANSFORM[3].xyz;
+		vec3 diff = pos - org;
+		force += length(diff) > 0.0 ? normalize(diff) * (radial_accel + tex_radial_accel) * mix(1.0, rand_from_seed(alt_seed), radial_accel_random) : vec3(0.0);
+		// apply tangential acceleration;
+		vec3 crossDiff = cross(normalize(diff), normalize(gravity));
+		force += length(crossDiff) > 0.0 ? normalize(crossDiff) * ((tangent_accel + tex_tangent_accel) * mix(1.0, rand_from_seed(alt_seed), tangent_accel_random)) : vec3(0.0);
+		// apply attractor forces
+		VELOCITY += force * DELTA;
+		// orbit velocity
+		if (damping + tex_damping > 0.0) {
+			float v = length(VELOCITY);
+			float damp = (damping + tex_damping) * mix(1.0, rand_from_seed(alt_seed), damping_random);
+			v -= damp * DELTA;
+			if (v < 0.0) {
+				VELOCITY = vec3(0.0);
+			} else {
+				VELOCITY = normalize(VELOCITY) * v;
+			}
+		}
+		float base_angle = (initial_angle + tex_angle) * mix(1.0, angle_rand, initial_angle_random);
+		base_angle += CUSTOM.y * LIFETIME * (angular_velocity + tex_angular_velocity) * mix(1.0, rand_from_seed(alt_seed) * 2.0 - 1.0, angular_velocity_random);
+		CUSTOM.x = base_angle * degree_to_rad;
+		CUSTOM.z = (anim_offset + tex_anim_offset) * mix(1.0, anim_offset_rand, anim_offset_random) + CUSTOM.y * (anim_speed + tex_anim_speed) * mix(1.0, rand_from_seed(alt_seed), anim_speed_random);
+	}
+	float tex_scale = 1.0;
+	float tex_hue_variation = 0.0;
+	float hue_rot_angle = (hue_variation + tex_hue_variation) * pi * 2.0 * mix(1.0, hue_rot_rand * 2.0 - 1.0, hue_variation_random);
+	float hue_rot_c = cos(hue_rot_angle);
+	float hue_rot_s = sin(hue_rot_angle);
+	mat4 hue_rot_mat = mat4(vec4(0.299, 0.587, 0.114, 0.0),
+			vec4(0.299, 0.587, 0.114, 0.0),
+			vec4(0.299, 0.587, 0.114, 0.0),
+			vec4(0.000, 0.000, 0.000, 1.0)) +
+		mat4(vec4(0.701, -0.587, -0.114, 0.0),
+			vec4(-0.299, 0.413, -0.114, 0.0),
+			vec4(-0.300, -0.588, 0.886, 0.0),
+			vec4(0.000, 0.000, 0.000, 0.0)) * hue_rot_c +
+		mat4(vec4(0.168, 0.330, -0.497, 0.0),
+			vec4(-0.328, 0.035,  0.292, 0.0),
+			vec4(1.250, -1.050, -0.203, 0.0),
+			vec4(0.000, 0.000, 0.000, 0.0)) * hue_rot_s;
+	COLOR = hue_rot_mat * textureLod(color_ramp, vec2(tv, 0.0), 0.0);
+
+	TRANSFORM[0].xyz = normalize(TRANSFORM[0].xyz);
+	TRANSFORM[1].xyz = normalize(TRANSFORM[1].xyz);
+	TRANSFORM[2].xyz = normalize(TRANSFORM[2].xyz);
+	float base_scale = tex_scale * mix(scale, 1.0, scale_random * scale_rand);
+	if (base_scale < 0.000001) {
+		base_scale = 0.000001;
+	}
+	TRANSFORM[0].xyz *= base_scale;
+	TRANSFORM[1].xyz *= base_scale;
+	TRANSFORM[2].xyz *= base_scale;
+	if (CUSTOM.y > CUSTOM.w) {		ACTIVE = false;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
+shader_param/direction = Vector3( 0, 0, 0 )
+shader_param/spread = 180.0
+shader_param/flatness = 0.0
+shader_param/initial_linear_velocity = 1.0
+shader_param/initial_angle = 0.0
+shader_param/angular_velocity = 0.0
+shader_param/orbit_velocity = 0.0
+shader_param/linear_accel = 0.0
+shader_param/radial_accel = 0.0
+shader_param/tangent_accel = 0.0
+shader_param/damping = 0.5
+shader_param/scale = 0.15
+shader_param/hue_variation = 0.0
+shader_param/anim_speed = 0.0
+shader_param/anim_offset = 0.0
+shader_param/initial_linear_velocity_random = 0.0
+shader_param/initial_angle_random = 0.0
+shader_param/angular_velocity_random = 0.0
+shader_param/orbit_velocity_random = 0.0
+shader_param/linear_accel_random = 0.0
+shader_param/radial_accel_random = 0.0
+shader_param/tangent_accel_random = 0.0
+shader_param/damping_random = 0.5
+shader_param/scale_random = 0.0
+shader_param/hue_variation_random = 0.0
+shader_param/anim_speed_random = 0.0
+shader_param/anim_offset_random = 0.0
+shader_param/lifetime_randomness = 1.0
+shader_param/color_value = Color( 1, 1, 1, 1 )
+shader_param/trail_divisor = 1
+shader_param/gravity = Vector3( 0, -1e-06, 0 )
+shader_param/color_ramp = ExtResource( 94 )
+
+[sub_resource type="ArrayMesh" id=9]
+surfaces/0 = {
+"aabb": AABB( -0.250292, -0.250292, 0, 0.500594, 0.500584, 1e-05 ),
+"array_data": PoolByteArray( 70, 38, 128, 62, 70, 38, 128, 190, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 60, 0, 60, 70, 38, 128, 190, 70, 38, 128, 190, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 60, 70, 38, 128, 62, 70, 38, 128, 62, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 60, 0, 0, 70, 38, 128, 190, 70, 38, 128, 62, 0, 0, 0, 0, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 2, 0, 2, 0, 1, 0, 3, 0 ),
+"blend_shape_data": [  ],
+"format": 97559,
+"index_count": 6,
+"material": ExtResource( 97 ),
+"name": "Material",
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+
+[sub_resource type="Shader" id=10]
+code = "shader_type particles;
+uniform vec3 direction;
+uniform float spread;
+uniform float flatness;
+uniform float initial_linear_velocity;
+uniform float initial_angle;
+uniform float angular_velocity;
+uniform float orbit_velocity;
+uniform float linear_accel;
+uniform float radial_accel;
+uniform float tangent_accel;
+uniform float damping;
+uniform float scale;
+uniform float hue_variation;
+uniform float anim_speed;
+uniform float anim_offset;
+uniform float initial_linear_velocity_random;
+uniform float initial_angle_random;
+uniform float angular_velocity_random;
+uniform float orbit_velocity_random;
+uniform float linear_accel_random;
+uniform float radial_accel_random;
+uniform float tangent_accel_random;
+uniform float damping_random;
+uniform float scale_random;
+uniform float hue_variation_random;
+uniform float anim_speed_random;
+uniform float anim_offset_random;
+uniform float lifetime_randomness;
+uniform vec4 color_value : hint_color;
+uniform int trail_divisor;
+uniform vec3 gravity;
+uniform sampler2D color_ramp;
+
+float rand_from_seed(inout uint seed) {
+	int k;
+	int s = int(seed);
+	if (s == 0)
+	s = 305420679;
+	k = s / 127773;
+	s = 16807 * (s - k * 127773) - 2836 * k;
+	if (s < 0)
+		s += 2147483647;
+	seed = uint(s);
+	return float(seed % uint(65536)) / 65535.0;
+}
+
+float rand_from_seed_m1_p1(inout uint seed) {
+	return rand_from_seed(seed) * 2.0 - 1.0;
+}
+
+uint hash(uint x) {
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = (x >> uint(16)) ^ x;
+	return x;
+}
+
+void vertex() {
+	uint base_number = NUMBER / uint(trail_divisor);
+	uint alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	float angle_rand = rand_from_seed(alt_seed);
+	float scale_rand = rand_from_seed(alt_seed);
+	float hue_rot_rand = rand_from_seed(alt_seed);
+	float anim_offset_rand = rand_from_seed(alt_seed);
+	float pi = 3.14159;
+	float degree_to_rad = pi / 180.0;
+
+	bool restart = false;
+	float tv = 0.0;
+	if (CUSTOM.y > CUSTOM.w) {
+		restart = true;
+		tv = 1.0;
+	}
+
+	if (RESTART || restart) {
+		float tex_linear_velocity = 0.0;
+		float tex_angle = 0.0;
+		float tex_anim_offset = 0.0;
+		float spread_rad = spread * degree_to_rad;
+		float angle1_rad = rand_from_seed_m1_p1(alt_seed) * spread_rad;
+		float angle2_rad = rand_from_seed_m1_p1(alt_seed) * spread_rad * (1.0 - flatness);
+		angle1_rad += direction.z != 0.0 ? atan(direction.x, direction.z) : sign(direction.x) * (pi / 2.0);
+		angle2_rad += direction.z != 0.0 ? atan(direction.y, abs(direction.z)) : (direction.x != 0.0 ? atan(direction.y, abs(direction.x)) : sign(direction.y) * (pi / 2.0));
+		vec3 direction_xz = vec3(sin(angle1_rad), 0.0, cos(angle1_rad));
+		vec3 direction_yz = vec3(0.0, sin(angle2_rad), cos(angle2_rad));
+		direction_yz.z = direction_yz.z / max(0.0001,sqrt(abs(direction_yz.z))); // better uniform distribution
+		vec3 vec_direction = vec3(direction_xz.x * direction_yz.z, direction_yz.y, direction_xz.z * direction_yz.z);
+		vec_direction = normalize(vec_direction);
+		VELOCITY = vec_direction * initial_linear_velocity * mix(1.0, rand_from_seed(alt_seed), initial_linear_velocity_random);
+		float base_angle = (initial_angle + tex_angle) * mix(1.0, angle_rand, initial_angle_random);
+		CUSTOM.x = base_angle * degree_to_rad;
+		CUSTOM.y = 0.0;
+		CUSTOM.w = (1.0 - lifetime_randomness * rand_from_seed(alt_seed));
+		CUSTOM.z = (anim_offset + tex_anim_offset) * mix(1.0, anim_offset_rand, anim_offset_random);
+		VELOCITY = (EMISSION_TRANSFORM * vec4(VELOCITY, 0.0)).xyz;
+		TRANSFORM = EMISSION_TRANSFORM * TRANSFORM;
+	} else {
+		CUSTOM.y += DELTA / LIFETIME;
+		tv = CUSTOM.y / CUSTOM.w;
+		float tex_linear_velocity = 0.0;
+		float tex_angular_velocity = 0.0;
+		float tex_linear_accel = 0.0;
+		float tex_radial_accel = 0.0;
+		float tex_tangent_accel = 0.0;
+		float tex_damping = 0.0;
+		float tex_angle = 0.0;
+		float tex_anim_speed = 0.0;
+		float tex_anim_offset = 0.0;
+		vec3 force = gravity;
+		vec3 pos = TRANSFORM[3].xyz;
+		// apply linear acceleration
+		force += length(VELOCITY) > 0.0 ? normalize(VELOCITY) * (linear_accel + tex_linear_accel) * mix(1.0, rand_from_seed(alt_seed), linear_accel_random) : vec3(0.0);
+		// apply radial acceleration
+		vec3 org = EMISSION_TRANSFORM[3].xyz;
+		vec3 diff = pos - org;
+		force += length(diff) > 0.0 ? normalize(diff) * (radial_accel + tex_radial_accel) * mix(1.0, rand_from_seed(alt_seed), radial_accel_random) : vec3(0.0);
+		// apply tangential acceleration;
+		vec3 crossDiff = cross(normalize(diff), normalize(gravity));
+		force += length(crossDiff) > 0.0 ? normalize(crossDiff) * ((tangent_accel + tex_tangent_accel) * mix(1.0, rand_from_seed(alt_seed), tangent_accel_random)) : vec3(0.0);
+		// apply attractor forces
+		VELOCITY += force * DELTA;
+		// orbit velocity
+		if (damping + tex_damping > 0.0) {
+			float v = length(VELOCITY);
+			float damp = (damping + tex_damping) * mix(1.0, rand_from_seed(alt_seed), damping_random);
+			v -= damp * DELTA;
+			if (v < 0.0) {
+				VELOCITY = vec3(0.0);
+			} else {
+				VELOCITY = normalize(VELOCITY) * v;
+			}
+		}
+		float base_angle = (initial_angle + tex_angle) * mix(1.0, angle_rand, initial_angle_random);
+		base_angle += CUSTOM.y * LIFETIME * (angular_velocity + tex_angular_velocity) * mix(1.0, rand_from_seed(alt_seed) * 2.0 - 1.0, angular_velocity_random);
+		CUSTOM.x = base_angle * degree_to_rad;
+		CUSTOM.z = (anim_offset + tex_anim_offset) * mix(1.0, anim_offset_rand, anim_offset_random) + CUSTOM.y * (anim_speed + tex_anim_speed) * mix(1.0, rand_from_seed(alt_seed), anim_speed_random);
+	}
+	float tex_scale = 1.0;
+	float tex_hue_variation = 0.0;
+	float hue_rot_angle = (hue_variation + tex_hue_variation) * pi * 2.0 * mix(1.0, hue_rot_rand * 2.0 - 1.0, hue_variation_random);
+	float hue_rot_c = cos(hue_rot_angle);
+	float hue_rot_s = sin(hue_rot_angle);
+	mat4 hue_rot_mat = mat4(vec4(0.299, 0.587, 0.114, 0.0),
+			vec4(0.299, 0.587, 0.114, 0.0),
+			vec4(0.299, 0.587, 0.114, 0.0),
+			vec4(0.000, 0.000, 0.000, 1.0)) +
+		mat4(vec4(0.701, -0.587, -0.114, 0.0),
+			vec4(-0.299, 0.413, -0.114, 0.0),
+			vec4(-0.300, -0.588, 0.886, 0.0),
+			vec4(0.000, 0.000, 0.000, 0.0)) * hue_rot_c +
+		mat4(vec4(0.168, 0.330, -0.497, 0.0),
+			vec4(-0.328, 0.035,  0.292, 0.0),
+			vec4(1.250, -1.050, -0.203, 0.0),
+			vec4(0.000, 0.000, 0.000, 0.0)) * hue_rot_s;
+	COLOR = hue_rot_mat * textureLod(color_ramp, vec2(tv, 0.0), 0.0);
+
+	TRANSFORM[0].xyz = normalize(TRANSFORM[0].xyz);
+	TRANSFORM[1].xyz = normalize(TRANSFORM[1].xyz);
+	TRANSFORM[2].xyz = normalize(TRANSFORM[2].xyz);
+	float base_scale = tex_scale * mix(scale, 1.0, scale_random * scale_rand);
+	if (base_scale < 0.000001) {
+		base_scale = 0.000001;
+	}
+	TRANSFORM[0].xyz *= base_scale;
+	TRANSFORM[1].xyz *= base_scale;
+	TRANSFORM[2].xyz *= base_scale;
+	if (CUSTOM.y > CUSTOM.w) {		ACTIVE = false;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
+shader_param/direction = Vector3( 0, 0, 0 )
+shader_param/spread = 180.0
+shader_param/flatness = 0.0
+shader_param/initial_linear_velocity = 1.0
+shader_param/initial_angle = 0.0
+shader_param/angular_velocity = 0.0
+shader_param/orbit_velocity = 0.0
+shader_param/linear_accel = 0.0
+shader_param/radial_accel = 0.0
+shader_param/tangent_accel = 0.0
+shader_param/damping = 0.4
+shader_param/scale = 1.0
+shader_param/hue_variation = 0.0
+shader_param/anim_speed = 0.0
+shader_param/anim_offset = 0.0
+shader_param/initial_linear_velocity_random = 0.0
+shader_param/initial_angle_random = 0.0
+shader_param/angular_velocity_random = 0.0
+shader_param/orbit_velocity_random = 0.0
+shader_param/linear_accel_random = 0.0
+shader_param/radial_accel_random = 0.0
+shader_param/tangent_accel_random = 0.0
+shader_param/damping_random = 0.5
+shader_param/scale_random = 0.0
+shader_param/hue_variation_random = 0.0
+shader_param/anim_speed_random = 0.0
+shader_param/anim_offset_random = 0.0
+shader_param/lifetime_randomness = 1.0
+shader_param/color_value = Color( 1, 1, 1, 1 )
+shader_param/trail_divisor = 1
+shader_param/gravity = Vector3( 0, -1e-06, 0 )
+shader_param/color_ramp = ExtResource( 94 )
+
+[sub_resource type="ShaderMaterial" id=12]
+shader = ExtResource( 89 )
+shader_param/albedo = Color( 1, 0.466667, 0.2, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/emission = Color( 1, 0.466667, 0.2, 1 )
+shader_param/emission_energy = 8.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/billboard = false
+shader_param/apply_scale = false
+shader_param/time = null
+shader_param/e_fade = 30.0
+shader_param/texture_albedo = ExtResource( 93 )
+
+[sub_resource type="PlaneMesh" id=13]
+material = SubResource( 12 )
+size = Vector2( 0.1, 0.1 )
+
+[node name="Track" type="Spatial"]
+script = ExtResource( 1 )
+checkpoints = 2
+botpoints = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 4 )
+
+[node name="WorldLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.799423, 0.469834, 0.374406, 0, -0.623211, 0.782054, 0.600769, -0.625192, -0.498209, 86.2963, 84.9402, -7.87231 )
+light_color = Color( 0.4, 0.8, 1, 1 )
+light_energy = 0.1
+light_bake_mode = 0
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_normal_bias = 0.05
+directional_shadow_depth_range = 1
+directional_shadow_max_distance = 40.0
+
+[node name="Ground" type="Spatial" parent="."]
+
+[node name="FloorBody" type="StaticBody" parent="Ground"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 50 )
+visible = false
+collision_layer = 9
+collision_mask = 0
+physics_material_override = ExtResource( 10 )
+
+[node name="InvisibleWall" type="CollisionShape" parent="Ground/FloorBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4042, -12.5524, 116.995 )
+shape = SubResource( 1 )
+
+[node name="InvisibleWall2" type="CollisionShape" parent="Ground/FloorBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4042, -12.5524, -82.8547 )
+shape = SubResource( 1 )
+
+[node name="InvisibleWall3" type="CollisionShape" parent="Ground/FloorBody"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 134.251, -12.5524, 17.0702 )
+shape = SubResource( 1 )
+
+[node name="InvisibleWall4" type="CollisionShape" parent="Ground/FloorBody"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -83.4426, -12.5524, 17.0702 )
+shape = SubResource( 1 )
+
+[node name="Bottom" type="CollisionShape" parent="Ground/FloorBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.6574, -58.7282, 17.4791 )
+shape = SubResource( 2 )
+
+[node name="FloorTT_0" type="MeshInstance" parent="Ground" groups=["ttfloors"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0.02, 50 )
+visible = false
+material_override = SubResource( 3 )
+cast_shadow = 0
+mesh = ExtResource( 25 )
+
+[node name="FloorTT_1" type="MeshInstance" parent="Ground" groups=["ttfloors"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0.02, 50 )
+visible = false
+material_override = SubResource( 4 )
+cast_shadow = 0
+mesh = ExtResource( 23 )
+
+[node name="FloorTT_2" type="MeshInstance" parent="Ground" groups=["ttfloors"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0.02, 50 )
+visible = false
+material_override = SubResource( 5 )
+cast_shadow = 0
+mesh = ExtResource( 3 )
+
+[node name="FloorTT_3" type="MeshInstance" parent="Ground" groups=["ttfloors"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0.02, 50 )
+visible = false
+material_override = SubResource( 6 )
+cast_shadow = 0
+mesh = ExtResource( 2 )
+
+[node name="RoadCombo" type="MeshInstance" parent="Ground"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 50 )
+layers = 3
+use_in_baked_light = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Checkpoints" type="Spatial" parent="."]
+visible = false
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 78.578, 0, 132.549 )
+visible = false
+
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource( 12 )]
+transform = Transform( 0.634096, 0, 0.773254, 0, 1, 0, -0.773254, 0, 0.634096, 144.922, 0, 129.291 )
+visible = false
+id = 1
+
+[node name="Botpoint" parent="Checkpoints" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1.791, 132.68, 0, 132.2 )
+
+[node name="Botpoint2" parent="Checkpoints" instance=ExtResource( 11 )]
+transform = Transform( 0.0294395, 0, 1.79022, 0, 1, 0, -0.999567, 0, 0.0527261, 145.563, 0, 126.497 )
+id = 1
+
+[node name="StartPositions" type="Spatial" parent="."]
+transform = Transform( 0.999997, 0, 0, 0, 1, 0, 0, 0, 0.999997, 49.9274, 0.454023, 45.3002 )
+
+[node name="StartPosition1" type="Position3D" parent="StartPositions"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+
+[node name="StartPosition2" type="Position3D" parent="StartPositions"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.12601, 0, 1.55301 )
+
+[node name="StartPosition3" type="Position3D" parent="StartPositions"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0279999, 0, 4.74901 )
+
+[node name="StartPosition4" type="Position3D" parent="StartPositions"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.12581, 0, 6.16472 )
+
+[node name="Car" parent="." instance=ExtResource( 44 )]
+transform = Transform( -4.37113e-08, 0, 0.999998, 0, 1, 0, -0.999998, 0, -4.37113e-08, 50, 0.714, 50 )
+engine_power = 100.0
+heavy_resistance = 120.0
+handbrake_resistance = 40.0
+handbrake_power = 8.0
+
+[node name="Blood" parent="." instance=ExtResource( 96 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.8829, 0.289347, 49.9607 )
+emitting = true
+one_shot = false
+process_material = SubResource( 8 )
+draw_pass_1 = SubResource( 9 )
+
+[node name="BulletImpact" parent="." instance=ExtResource( 95 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.8829, 0.289347, 49.9607 )
+emitting = true
+one_shot = false
+process_material = SubResource( 11 )
+draw_pass_1 = SubResource( 13 )
+
+[node name="Pickup3" parent="." instance=ExtResource( 103 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.807, 0, 50.0027 )
+
+[node name="Pickup4" parent="." instance=ExtResource( 90 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.8359, 0, 49.9577 )
+power = 0.0
+
+[node name="Pickup5" parent="." instance=ExtResource( 100 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.8359, 0, 49.9577 )
+power = 0.0
+
+[node name="Pickup6" parent="." instance=ExtResource( 102 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.8359, 0, 49.9577 )
+power = 0.0
+
+[node name="Pickup7" parent="." instance=ExtResource( 101 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.8359, 0, 49.9577 )
+power = 0.0

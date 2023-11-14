@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/objects/stonewall_minicurve.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/materials/_physics/phx_basic.tres" type="PhysicsMaterial" id=3]
+[ext_resource path="res://assets/materials/stone_wall.tres" type="Material" id=4]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.345204, 0.535827, 0.143084 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.147317, 0.535827, 0.18222 )
+
+[node name="StoneWall" type="StaticBody"]
+collision_layer = 11
+collision_mask = 0
+physics_material_override = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.9, 0, 0, 0, 0.5, 0, 0, 0 )
+use_in_baked_light = true
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.926286, 0, 0.376822, 0, 1, 0, -0.376822, 0, 0.926286, 0.174294, 0.533535, -0.0709046 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 0.544712, 0, -0.838623, 0, 1, 0, 0.838623, 0, 0.544712, -0.442536, 0.533535, -0.268385 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 0.963672, 0, -0.267087, 0, 1, 0, 0.267087, 0, 0.963672, -0.182736, 0.533535, -0.0258945 )
+visible = false
+shape = SubResource( 2 )

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/race/HitArea.gd" type="Script" id=3]
+
+[sub_resource type="CylinderShape" id=1]
+radius = 0.341767
+height = 0.5
+
+[node name="SewerHole" type="Area"]
+gravity = 1.0
+linear_damp = 0.01
+angular_damp = 0.01
+monitoring = false
+collision_layer = 2
+collision_mask = 0
+script = ExtResource( 3 )
+hit_force_enter = 1.0
+hit_force_exit = 3.0
+linear_friction = -2.0
+angular_friction = -2.0
+lateral_friction = -5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.183688, 0 )
+shape = SubResource( 1 )

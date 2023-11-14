@@ -1,0 +1,84 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://assets/objects/excavator.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/materials/metal_truegrey_tight.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/_physics/phx_basic.tres" type="PhysicsMaterial" id=3]
+[ext_resource path="res://assets/materials/metal_grey.tres" type="Material" id=4]
+[ext_resource path="res://assets/materials/window_car.tres" type="Material" id=5]
+[ext_resource path="res://assets/materials/tyre.tres" type="Material" id=6]
+[ext_resource path="res://assets/materials/metal_yellow.tres" type="Material" id=7]
+[ext_resource path="res://assets/materials/metal_grey_nooutline.tres" type="Material" id=8]
+[ext_resource path="res://assets/materials/metal_silver_nooutline.tres" type="Material" id=9]
+
+[sub_resource type="ConvexPolygonShape" id=1]
+points = PoolVector3Array( 0.294016, 1.93919, 0.321005, 0.294016, 1.98097, 0.237666, 0.377391, 1.93919, 0.0709894, 0.419134, 2.02267, 0.0293569, 0.502399, 1.93919, 0.0293569, 0.544142, 2.27272, 0.445976, 0.627407, 2.3559, 0.362711, 0.669149, 1.93919, 0.57102, 0.669149, 2.31443, 0.154328, 0.710782, 2.27272, 0.612652, 0.794157, 2.3559, 0.154328, 0.835789, 2.27272, 0.654358, 0.835789, 2.48092, 0.57102, 0.919054, 1.93919, 0.154328, 0.960687, 2.02267, 0.154328, 1.00243, 2.31443, 0.154328, 1.04406, 2.60595, 0.57102, 1.0858, 1.98097, 0.279372, 1.0858, 2.60595, 0.404343, 1.16907, 2.52263, 0.321005, 1.21081, 2.68936, 0.654358, 1.25244, 2.68936, 0.487682, 1.29408, 2.1477, 0.779329, 1.29408, 2.56433, 0.779329, 1.33582, 2.10599, 0.737697, 1.33582, 2.68936, 0.487682, 1.40916, 2.56024, 0.77264, 1.4192, 2.10599, 0.445976, 1.4192, 2.10599, 0.529314, 1.4192, 2.56433, 0.445976, 1.4192, 2.73098, 0.612652, 1.4192, 2.73098, 0.695991 )
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( 1.41931, 2.14759, 0.446025, 1.41931, 2.14759, 0.779574, 1.41931, 2.56437, 0.446025, 1.41931, 2.60598, 0.821313, 1.41931, 2.73108, 0.57124, 1.41931, 2.73108, 0.737925, 1.46116, 2.14759, 0.446025, 1.46116, 2.56437, 0.446025, 1.5029, 2.18933, 0.862961, 1.54451, 2.14759, 0.612799, 1.58624, 2.77282, 0.821313, 1.66959, 2.27269, 0.94608, 1.66959, 2.64772, 0.94608, 1.7112, 2.77282, 0.654538, 1.83628, 2.23107, 0.612799, 2.12781, 2.35604, 1.11285, 2.41946, 2.48095, 1.27963, 2.41946, 2.77282, 1.27963, 2.58616, 2.48095, 0.94608, 2.58616, 2.77282, 0.94608, 2.62789, 2.48095, 1.07112, 2.62789, 2.56437, 1.36302, 2.62789, 2.77282, 1.36302, 2.6695, 2.52269, 0.987728, 2.6695, 2.52269, 1.32119, 2.6695, 2.77282, 0.987728, 2.6695, 2.77282, 1.36302 )
+
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( 2.66975, 2.52245, 1.02962, 2.66975, 2.56418, 1.36294, 2.66975, 3.14757, 1.27973, 2.66975, 3.1893, 1.15467, 2.71145, 2.56418, 1.40463, 2.71145, 2.81414, 1.40463, 2.75324, 2.52245, 1.02962, 2.75324, 2.77263, 1.02962, 2.79494, 3.14757, 1.40463, 2.79494, 3.27277, 1.32126, 2.83649, 1.27266, 1.40463, 2.8782, 1.02247, 1.36294, 2.8782, 1.02247, 1.44631, 2.8782, 3.10606, 1.44631, 2.8782, 3.27277, 1.19636, 2.91998, 0.980738, 1.44631, 2.91998, 3.27277, 1.27973, 2.96161, 1.02247, 1.19636, 2.96161, 1.02247, 1.488, 2.96161, 2.64743, 1.11299, 2.96161, 2.93934, 1.488, 2.96161, 3.10606, 1.44631, 2.96161, 3.14757, 1.15467, 3.00324, 0.980738, 1.19636, 3.00324, 2.93934, 1.488, 3.04495, 3.10606, 1.23805, 3.0865, 0.980738, 1.52969, 3.0865, 1.02247, 1.19636, 3.0865, 3.02259, 1.19636, 3.16983, 1.85604, 1.23805, 3.16983, 2.81414, 1.23805, 3.21146, 0.980738, 1.52969, 3.25324, 2.60592, 1.44631, 3.25324, 2.64743, 1.36294, 3.29495, 0.980738, 1.32126, 3.3365, 1.02247, 1.40463, 3.3365, 1.31417, 1.57142, 3.37821, 1.14745, 1.57142, 3.41999, 1.31417, 1.57142, 3.4617, 1.27266, 1.44631, 3.4617, 1.27266, 1.52969 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 1.36099, 0.358586, 0.937504 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 1.08752, 0.333985, 0.890069 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.459758, 0.220723, 0.326794 )
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 0.430655, 0.71384, 0.49393 )
+
+[node name="Excavator" type="StaticBody"]
+collision_layer = 11
+collision_mask = 0
+physics_material_override = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0 )
+use_in_baked_light = true
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 9 )
+material/1 = ExtResource( 8 )
+material/2 = ExtResource( 7 )
+material/3 = ExtResource( 5 )
+material/4 = ExtResource( 6 )
+material/5 = ExtResource( 2 )
+material/6 = ExtResource( 4 )
+
+[node name="CollisionShape11" type="CollisionShape" parent="."]
+transform = Transform( 1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape8" type="CollisionShape" parent="."]
+transform = Transform( 1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0 )
+visible = false
+shape = SubResource( 2 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0 )
+visible = false
+shape = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0.507012, 0 )
+visible = false
+shape = SubResource( 4 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="."]
+transform = Transform( 1.27773, 0, -0.572198, 0, 1.4, 0, 0.572198, 0, 1.27773, -0.322505, 1.46251, -0.231362 )
+visible = false
+shape = SubResource( 5 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="."]
+transform = Transform( 1.27773, 0, -0.572198, 0, 1.4, 0, 0.572198, 0, 1.27773, 0.680548, 2.25417, -0.612484 )
+visible = false
+shape = SubResource( 6 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 0.925349, 0, -0.379117, 0, 1, 0, 0.379117, 0, 0.925349, 4.23912, 0.73647, 1.89918 )
+visible = false
+shape = SubResource( 7 )

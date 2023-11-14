@@ -1,0 +1,44 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/materials/plastic_black.tres" type="Material" id=1]
+[ext_resource path="res://assets/objects/railroad_gatelights.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/materials/_physics/phx_basic.tres" type="PhysicsMaterial" id=3]
+[ext_resource path="res://assets/materials/wood_white.tres" type="Material" id=4]
+[ext_resource path="res://assets/materials/wood_red.tres" type="Material" id=5]
+[ext_resource path="res://assets/materials/metal_truegrey.tres" type="Material" id=6]
+[ext_resource path="res://assets/materials/metal_truegrey_tighter.tres" type="Material" id=7]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.1491, 0.926272, 0.167257 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.399398, 0.554747, 0.0986696 )
+
+[node name="RailroadGateLights" type="StaticBody"]
+collision_layer = 11
+collision_mask = 0
+physics_material_override = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+use_in_baked_light = true
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 1 )
+material/1 = ExtResource( 4 )
+material/2 = ExtResource( 1 )
+material/3 = ExtResource( 6 )
+material/4 = ExtResource( 6 )
+material/5 = ExtResource( 5 )
+material/6 = ExtResource( 4 )
+material/7 = ExtResource( 7 )
+material/8 = ExtResource( 5 )
+material/9 = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0041337, 0.880181, 0.0289347 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39943, 0.0345971 )
+visible = false
+shape = SubResource( 2 )
