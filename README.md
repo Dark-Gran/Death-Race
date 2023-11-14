@@ -2,7 +2,9 @@
   
 ![main_preview](_screenshots/00.png)  
   
-This is a FREE game.  
+This is a FREE demo.  
+(Full beta yet to be released.)  
+  
 Made in [Godot](https://github.com/godotengine/godot) 3.5.3, the open-source alternative to engines like Unity.
 
 [ALPHA RELEASE DOWNLOAD](https://github.com/Dark-Gran/Death-Race/releases/tag/v0.1)  
@@ -16,6 +18,8 @@ Made in [Godot](https://github.com/godotengine/godot) 3.5.3, the open-source alt
 The game attempts to recapture the driving feel of old Rockstar games like Death Rally or GTA1&2 while utilizing a modern newtonian physics engine.  
   
 The tournament base, which gives an otherwise arcade game more serious feeling, is to be built upon to expand both gameplay (eg. choice of weapons) and atmosphere (storytelling).  
+
+The code is open-source, excluding the assets.  
   
 ## Todo for Beta  
   
