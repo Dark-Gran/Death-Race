@@ -28,8 +28,6 @@ _- Menus Upgrade (Out-of-Race GUI)_
 _- Underground market (eg. mines)_  
 _- More Tracks & Cars (incl. Tier III)_  
 _- Sound & Music_  
-_- Mobile version_  
-
 
 ## Todo (Based on reception)
 _- Storyline (incl. Cutscenes)_  
