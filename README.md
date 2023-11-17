@@ -21,16 +21,10 @@ The tournament base, which gives an otherwise arcade game more serious feeling, 
 
 The code is open-source, excluding the assets.  
   
-## Todo for Beta  
-  
-_~~- Gameplay: Higher speeds~~_  
-_~~- Menus Upgrade (Out-of-Race GUI)~~_  
-_~~- Underground market (eg. mines)~~_  
-_- More Tracks & Cars (incl. Tier III)_  
-_- Sound & Music_  
-
 ## Todo (Based on reception)
 _- Port to Godot 4.x or Unity_  
+_- More Tracks & Cars (incl. Tier III)_  
+_- Sound & Music_  
 _- Storyline (incl. Cutscenes)_  
 _- "Final boss race"_  
 _- Choice of Weapons_  
