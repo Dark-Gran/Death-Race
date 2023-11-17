@@ -19,6 +19,10 @@ The game attempts to recapture the driving feel of old Rockstar games like Death
 The tournament base, which gives an otherwise arcade game more serious feeling, is to be built upon to expand both gameplay (eg. choice of weapons) and atmosphere (storytelling).  
 
 The code is open-source, excluding the assets.  
+
+## Known Issues  
+  
+- If the race staggers consistently, a restart is required. (Godot 3.x has issues with compiling particle shaders.)  
   
 ## Todo (Based on reception)
 _- Port to Godot 4.x or Unity_  
