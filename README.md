@@ -3,7 +3,6 @@
 ![main_preview](_screenshots/00.png)  
   
 This is a FREE demo.  
-(Full beta yet to be released.)  
   
 Made in [Godot](https://github.com/godotengine/godot) 3.5.3, the open-source alternative to engines like Unity.
 
