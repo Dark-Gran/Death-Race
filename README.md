@@ -22,7 +22,7 @@ The code is open-source, excluding the assets.
 
 ## Known Issues  
   
-- If the race staggers consistently, a restart is required. (Godot 3.x has issues with compiling particle shaders.)  
+- Often the first race staggers at the beginning and shortly after. If the race staggers consistently, a restart is required. (Godot 3.x has issues with compiling shaders.)  
   
 ## Todo (Based on reception)
 _- Port to Godot 4.x or Unity_  
