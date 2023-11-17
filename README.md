@@ -2,7 +2,7 @@
   
 ![main_preview](_screenshots/00.png)  
   
-This is a FREE demo.  
+This is a FREE game.  
   
 Made in [Godot](https://github.com/godotengine/godot) 3.5.3, the open-source alternative to engines like Unity.
 
