@@ -23,9 +23,9 @@ The code is open-source, excluding the assets.
   
 ## Todo for Beta  
   
-_- Gameplay: Higher speeds_  
-_- Menus Upgrade (Out-of-Race GUI)_  
-_- Underground market (eg. mines)_  
+_~~- Gameplay: Higher speeds~~_  
+_~~- Menus Upgrade (Out-of-Race GUI)~~_  
+_~~- Underground market (eg. mines)~~_  
 _- More Tracks & Cars (incl. Tier III)_  
 _- Sound & Music_  
 
