@@ -10,7 +10,9 @@ Made in [Godot](https://github.com/godotengine/godot) 3.5.3, the open-source alt
 (Soundless)  
   
 **Controls:**  
-- Keyboard.  
+- Keyboard.
+  
+[Visit itch.io page](https://darkgran.itch.io/death-race) if you want to donate to my work.  
   
 ## About Project  
   
