@@ -6,7 +6,7 @@ This is a FREE game.
   
 Made in [Godot](https://github.com/godotengine/godot) 3.5.3, the open-source alternative to engines like Unity.
 
-[ALPHA RELEASE DOWNLOAD](https://github.com/Dark-Gran/Death-Race/releases/tag/v0.1)  
+~~[ALPHA RELEASE DOWNLOAD](https://github.com/Dark-Gran/Death-Race/releases/tag/v0.1)~~ - **TEMPORARILY UNAVAILABLE**  
 (Soundless)  
   
 **Controls:**  
