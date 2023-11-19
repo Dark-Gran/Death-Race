@@ -26,6 +26,8 @@ var no_stuck_time:float = 0 # going up
 var repeated_stuck_count:int = 0
 var backed_on_stuck:bool = false
 
+var nitro_forbidden:bool = false # turned on by botpoints
+
 var detected:Dictionary = {} # PhysicsBody : bool
 var losing_to_player:bool = false # set by Race
 
@@ -84,6 +86,7 @@ func encountered_botpoint(id:int, route:int) -> void: # called by Car
 		backed_on_stuck = false
 		current_route = route
 		get_and_set_target_botpoint(Main.inc_int_around(id, car.get_parent().botpoints-1), route)
+		nitro_forbidden = target_botpoint.bot_forbid_nitro
 
 func back_one_botpoint() -> void:
 	backed_on_stuck = true
@@ -190,7 +193,7 @@ func drive() -> void:
 					hallucination_timer = HALLUCINATION_TIME
 		if !is_peaceful():
 			# NITRO
-			car.nitro_active = !is_recovering() && car.can_nitro() && car.steer_angle == 0.0 && car.condition > car.max_condition*NITRO_HEALTH_THRESH && (are_players_around() || losing_to_player)
+			car.nitro_active = !nitro_forbidden && !is_recovering() && car.can_nitro() && car.steer_angle == 0.0 && car.condition > car.max_condition*NITRO_HEALTH_THRESH && (are_players_around() || losing_to_player)
 			if car.nitro_active:
 				if car.wheel_force > 0.0:
 					car.wheel_force += car.wheel_nitro_power

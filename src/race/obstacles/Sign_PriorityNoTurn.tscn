@@ -15,7 +15,7 @@ points = PoolVector3Array( 0, 2.20116, -0.065493, 0, -2.69082, -0.065493, 0.0567
 collision_layer = 9
 collision_mask = 9
 mode = 1
-mass = 35.0
+mass = 50.0
 physics_material_override = ExtResource( 6 )
 script = ExtResource( 3 )
 
@@ -35,9 +35,9 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Area" type="Area" parent="."]
-monitorable = false
 collision_layer = 0
 collision_mask = 2
+monitorable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 0, 0 )

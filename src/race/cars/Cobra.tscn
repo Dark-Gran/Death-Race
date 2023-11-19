@@ -44,20 +44,20 @@ axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource( 5 )
-condition = 120.0
-collision_fragility = 0.42
-engine_power = 230.0
+condition = 140.0
+collision_fragility = 0.4
+engine_power = 280.0
 transmission = 0.9
-lateral_resistance = 150.0
-heavy_resistance = 180.0
+lateral_resistance = 240.0
+heavy_resistance = 260.0
 handbrake_resistance = 80.0
 handbrake_heavy_resistance = 125.0
-handbrake_power = 16.0
+handbrake_power = 30.0
 main_mat_index = 0
 light_mat_index = 5
 start_offset_y = -0.172
 wheel_mass_coef = 16.0
-bot_recovery_time_adjust = 0.75
+bot_recovery_time_adjust = 0.9
 bot_stuck_velocity = 1.5
 
 [node name="Gun" parent="." instance=ExtResource( 22 )]
@@ -119,7 +119,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.799014, -0.4847, 1.22196 )
 visible = false
 
 [node name="CollisionShape3" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.795, -0.257, 1.222 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.795, -0.248724, 1.222 )
 visible = false
 shape = ExtResource( 21 )
 
@@ -152,7 +152,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.799, -0.484279, 1.22184 )
 visible = false
 
 [node name="CollisionShape4" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.795, -0.256, 1.222 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.795, -0.247724, 1.222 )
 visible = false
 shape = ExtResource( 21 )
 
@@ -183,7 +183,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.798598, -0.4847, -1.20203 )
 visible = false
 
 [node name="CollisionShape5" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.795, -0.256, -1.202 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.795, -0.247724, -1.202 )
 visible = false
 shape = ExtResource( 21 )
 
@@ -214,7 +214,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.799, -0.484279, -1.20227 )
 visible = false
 
 [node name="CollisionShape6" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.795, -0.256, -1.202 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.795, -0.247724, -1.202 )
 visible = false
 shape = ExtResource( 21 )
 

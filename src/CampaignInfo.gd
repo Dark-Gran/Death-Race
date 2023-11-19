@@ -23,7 +23,7 @@ const ARMOR_UPGRADE_POWER:float = 20.0 # in-future: distinct between extra healt
 const UPGRADE_PRICE:int = 250 # per level(tier)
 const SELL_PRICE:float = 0.5 # part from the original price
 
-const REPAIR_PRICE:float = 0.25 # How much of original-price does it cost to repair 100%
+const REPAIR_PRICE:float = 0.2 # How much of original-price does it cost to repair 100%
 const REPAIR_POWER:float = 0.1 # Strength of one repair-use
 
 const MINES_PRICE:int = 500 # per level(tier)
@@ -36,8 +36,8 @@ const SABOTAUGE_BOT:float = 0.2
 const ROCKET_FUEL_CHANCE:float = 0.33 # chance that an enemy will pick rocket fuel
 const MINES_CHANCE:float = 0.33 # chance that an enemy will pick mines
 
-const REAPER_REWARDS:Array = [1500, 4500, 9000] # Reward for killing all (possibly placeholder)
-const KILL_REWARDS:Array = [1000, 3000, 6000]
+const REAPER_REWARDS:Array = [1500, 3000, 4500] # Reward for killing all (possibly placeholder)
+const KILL_REWARDS:Array = [1000, 2000, 3000]
 const QUEST_CHANCE:float = 0.1
 enum QuestType {KILL, MAX}
 
@@ -49,8 +49,8 @@ const RACE_REWARDS_POINTS = [
 
 const RACE_REWARDS_CASH = [
 	[1000, 500, 250, 0],
-	[3000, 1500, 750, 0],
-	[6000, 3000, 1500, 0]
+	[2000, 1000, 500, 0],
+	[3000, 1500, 1000, 0]
 ]
 
 enum DriverInfo {PORTRAIT, NAME, HUE, CASH, SCORE, LAST_REWARD_POINTS, SCORE_POSITION, BASE_SKILL, GARAGE_SLOTS, CARS, MAX}
@@ -62,43 +62,43 @@ const CARS:Dictionary = {
 	"Companion" : {
 		CarInfo.TIER : 0,
 		CarInfo.PRICE : 1965,
-		CarInfo.HITPOINTS : 140.0,
+		CarInfo.HITPOINTS : 160.0,
 		CarInfo.RESOURCE : "Companion"
 	},
 	"Bee" : {
 		CarInfo.TIER : 0,
 		CarInfo.PRICE : 2000,
-		CarInfo.HITPOINTS : 160.0,
+		CarInfo.HITPOINTS : 180.0,
 		CarInfo.RESOURCE : "Bee"
 	},
 	"Warden" : {
 		CarInfo.TIER : 1,
-		CarInfo.PRICE : 5000,
-		CarInfo.HITPOINTS : 190.0,
+		CarInfo.PRICE : 4000,
+		CarInfo.HITPOINTS : 220.0,
 		CarInfo.RESOURCE : "Warden"
 	},
 	"Warrior" : {
 		CarInfo.TIER : 2,
-		CarInfo.PRICE : 10000,
-		CarInfo.HITPOINTS : 170.0,
+		CarInfo.PRICE : 7000,
+		CarInfo.HITPOINTS : 190.0,
 		CarInfo.RESOURCE : "Warrior"
 	},
 	"Hunter" : {
 		CarInfo.TIER : 2,
-		CarInfo.PRICE : 10000,
-		CarInfo.HITPOINTS : 160.0,
+		CarInfo.PRICE : 9000,
+		CarInfo.HITPOINTS : 180.0,
 		CarInfo.RESOURCE : "Hunter"
 	},
 	"Needle" : {
 		CarInfo.TIER : 3,
-		CarInfo.PRICE : 15000,
-		CarInfo.HITPOINTS : 130.0,
+		CarInfo.PRICE : 12000,
+		CarInfo.HITPOINTS : 150.0,
 		CarInfo.RESOURCE : "Needle"
 	},
 	"Cobra" : {
 		CarInfo.TIER : 3,
-		CarInfo.PRICE : 20000,
-		CarInfo.HITPOINTS : 120.0,
+		CarInfo.PRICE : 15000,
+		CarInfo.HITPOINTS : 140.0,
 		CarInfo.RESOURCE : "Cobra"
 	},
 }
@@ -118,7 +118,7 @@ var player_info:Dictionary = {
 	DriverInfo.CARS: [
 		{
 			CarSlot.NAME : "Companion",
-			CarSlot.CONDITION : 140.0,
+			CarSlot.CONDITION : 160.0,
 			CarSlot.ENGINE : 0,
 			CarSlot.TYRES : 0,
 			CarSlot.ARMOR : 0
@@ -169,7 +169,7 @@ var bot_infos:Dictionary = { # sorted by Portrait ID
 		DriverInfo.CARS: [
 		{
 			CarSlot.NAME : "Hunter",
-			CarSlot.CONDITION : 160.0,
+			CarSlot.CONDITION : 180.0,
 			CarSlot.ENGINE : 2,
 			CarSlot.TYRES : 2,
 			CarSlot.ARMOR : 0
@@ -189,7 +189,7 @@ var bot_infos:Dictionary = { # sorted by Portrait ID
 		DriverInfo.CARS: [
 		{
 			CarSlot.NAME : "Warden",
-			CarSlot.CONDITION : 210.0,
+			CarSlot.CONDITION : 240.0,
 			CarSlot.ENGINE : 1,
 			CarSlot.TYRES : 1,
 			CarSlot.ARMOR : 1
@@ -209,7 +209,7 @@ var bot_infos:Dictionary = { # sorted by Portrait ID
 		DriverInfo.CARS: [
 		{
 			CarSlot.NAME : "Bee",
-			CarSlot.CONDITION : 160.0,
+			CarSlot.CONDITION : 180.0,
 			CarSlot.ENGINE : 0,
 			CarSlot.TYRES : 1,
 			CarSlot.ARMOR : 0
@@ -229,7 +229,7 @@ var bot_infos:Dictionary = { # sorted by Portrait ID
 		DriverInfo.CARS: [
 		{
 			CarSlot.NAME : "Companion",
-			CarSlot.CONDITION : 140.0,
+			CarSlot.CONDITION : 160.0,
 			CarSlot.ENGINE : 0,
 			CarSlot.TYRES : 1,
 			CarSlot.ARMOR : 0
@@ -249,7 +249,7 @@ var bot_infos:Dictionary = { # sorted by Portrait ID
 		DriverInfo.CARS: [
 		{
 			CarSlot.NAME : "Warrior",
-			CarSlot.CONDITION : 190.0,
+			CarSlot.CONDITION : 210.0,
 			CarSlot.ENGINE : 0,
 			CarSlot.TYRES : 2,
 			CarSlot.ARMOR : 1
@@ -269,7 +269,7 @@ var bot_infos:Dictionary = { # sorted by Portrait ID
 		DriverInfo.CARS: [
 		{
 			CarSlot.NAME : "Companion",
-			CarSlot.CONDITION : 140.0,
+			CarSlot.CONDITION : 160.0,
 			CarSlot.ENGINE : 0,
 			CarSlot.TYRES : 1,
 			CarSlot.ARMOR : 0
@@ -289,7 +289,7 @@ var bot_infos:Dictionary = { # sorted by Portrait ID
 		DriverInfo.CARS: [
 		{
 			CarSlot.NAME : "Warden",
-			CarSlot.CONDITION : 190.0,
+			CarSlot.CONDITION : 220.0,
 			CarSlot.ENGINE : 1,
 			CarSlot.TYRES : 1,
 			CarSlot.ARMOR : 0
@@ -309,7 +309,7 @@ var bot_infos:Dictionary = { # sorted by Portrait ID
 		DriverInfo.CARS: [
 		{
 			CarSlot.NAME : "Hunter",
-			CarSlot.CONDITION : 200.0,
+			CarSlot.CONDITION : 220.0,
 			CarSlot.ENGINE : 1,
 			CarSlot.TYRES : 2,
 			CarSlot.ARMOR : 2
@@ -329,7 +329,7 @@ var bot_infos:Dictionary = { # sorted by Portrait ID
 		DriverInfo.CARS: [
 		{
 			CarSlot.NAME : "Warden",
-			CarSlot.CONDITION : 210.0,
+			CarSlot.CONDITION : 240.0,
 			CarSlot.ENGINE : 1,
 			CarSlot.TYRES : 0,
 			CarSlot.ARMOR : 1
@@ -349,7 +349,7 @@ var bot_infos:Dictionary = { # sorted by Portrait ID
 		DriverInfo.CARS: [
 		{
 			CarSlot.NAME : "Needle",
-			CarSlot.CONDITION : 180.0,
+			CarSlot.CONDITION : 210.0,
 			CarSlot.ENGINE : 3,
 			CarSlot.TYRES : 2,
 			CarSlot.ARMOR : 3
@@ -369,7 +369,7 @@ var bot_infos:Dictionary = { # sorted by Portrait ID
 		DriverInfo.CARS: [
 		{
 			CarSlot.NAME : "Cobra",
-			CarSlot.CONDITION : 160.0,
+			CarSlot.CONDITION : 180.0,
 			CarSlot.ENGINE : 3,
 			CarSlot.TYRES : 3,
 			CarSlot.ARMOR : 2
@@ -389,7 +389,7 @@ var bot_infos:Dictionary = { # sorted by Portrait ID
 		DriverInfo.CARS: [
 		{
 			CarSlot.NAME : "Cobra",
-			CarSlot.CONDITION : 180.0,
+			CarSlot.CONDITION : 200.0,
 			CarSlot.ENGINE : 3,
 			CarSlot.TYRES : 3,
 			CarSlot.ARMOR : 3

@@ -48,7 +48,7 @@ func get_new_focus(f:int, max_f:int, down:bool=true) -> int:
 func menu_input(event:InputEvent) -> void:
 	if event.is_action("ui_up") || event.is_action("ui_down"): # up & down
 		set_focus(get_new_focus(focus, buttons.get_child_count()-1, event.is_action("ui_down")))
-	elif event.is_action("ui_select") && !Input.is_action_pressed("mine"): # enter
+	elif event.is_action("ui_select"): #  && !Input.is_action_pressed("mine") 
 		if focus < 0:
 			var i:int = 0
 			while !buttons.get_child(i) is FocusButton || buttons.get_child(i).disabled:

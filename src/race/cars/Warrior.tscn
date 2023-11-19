@@ -45,13 +45,14 @@ axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource( 5 )
-condition = 170.0
-engine_power = 230.0
-lateral_resistance = 115.0
-heavy_resistance = 155.0
+condition = 190.0
+engine_power = 250.0
+transmission = 0.7
+lateral_resistance = 190.0
+heavy_resistance = 240.0
 handbrake_resistance = 55.0
 handbrake_heavy_resistance = 100.0
-handbrake_power = 13.0
+handbrake_power = 25.0
 main_mat_index = 0
 light_mat_index = 1
 start_offset_y = -0.048
@@ -114,7 +115,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.692475, -0.628612, 1.31982 )
 visible = false
 
 [node name="CollisionShape3" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.692475, -0.400464, 1.31982 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.692475, -0.392233, 1.31982 )
 visible = false
 shape = ExtResource( 23 )
 
@@ -146,7 +147,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692, -0.628191, 1.3197 )
 visible = false
 
 [node name="CollisionShape4" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692, -0.400191, 1.3197 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692, -0.39196, 1.3197 )
 visible = false
 shape = ExtResource( 23 )
 
@@ -177,7 +178,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.692059, -0.628612, -1.05248 
 visible = false
 
 [node name="CollisionShape5" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.692059, -0.400191, -1.05248 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.692059, -0.39196, -1.05248 )
 visible = false
 shape = ExtResource( 23 )
 
@@ -208,7 +209,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692, -0.628191, -1.05272 )
 visible = false
 
 [node name="CollisionShape6" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692, -0.400191, -1.05272 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692, -0.39196, -1.05272 )
 visible = false
 shape = ExtResource( 23 )
 

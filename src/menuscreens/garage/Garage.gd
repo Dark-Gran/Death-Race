@@ -275,6 +275,8 @@ func refresh_car_shop() -> void:
 	# 3D
 	color_car(spatial.get_node("CarShop/CarSlot").get_child(shop_car), shop_hue, CI.CARS.keys()[shop_car][CI.CarSlot.NAME] == "Companion")
 	spatial.get_node("CarShop/CarSlot").get_child(shop_car).visible = true
+	if get_tree().get_root().has_node("MenuScreens"):
+		get_tree().get_root().get_node("MenuScreens/Viewports/Viewport/MainMenu").visible = false
 
 func engage_car_shop(f:int, forward:bool=true) -> void:
 	match f:
@@ -325,6 +327,10 @@ func set_shop_car(sc:int) -> void:
 	spatial.get_node("CarShop/CarSlot").get_child(shop_car).visible = false
 	shop_car = sc
 	refresh_car_shop()
+
+func hide_shop_car() -> void:
+	if spatial != null:
+		spatial.get_node("CarShop/CarSlot").get_child(shop_car).visible = false
 
 func buy_car(sc:int) -> void:
 	var car_name:String = CI.CARS.keys()[shop_car]

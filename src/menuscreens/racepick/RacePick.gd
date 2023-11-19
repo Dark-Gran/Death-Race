@@ -8,6 +8,7 @@ const MAP_PORTRAITS:Array = [
 	preload("res://assets/map_portraits/4.png"),
 	preload("res://assets/map_portraits/5.png"),
 	preload("res://assets/map_portraits/6.png")
+	#preload("res://assets/map_portraits/5.png")
 ]
 
 const MAPS:Array = [
@@ -17,6 +18,7 @@ const MAPS:Array = [
 	["Uptown: Day", 1, 2, 225, [0]],
 	["Countryside: Night", 2, 1, 90, [0, 1]],
 	["Silver City: Day", 3, 4, 175, [1]]
+	#["Forest: Day", 4, 0, 0, [0]]
 ]
 
 var picked_maps:Array = []
@@ -244,6 +246,8 @@ func go_skip_or_race() -> void:
 		$Info.visible = true
 		$Info/NoSignUp.visible = true
 		set_focus(-1)
+		if get_tree().get_root().has_node("MenuScreens"):
+			get_tree().get_root().get_node("MenuScreens/Viewports/Viewport/Camera/AnimationPlayer").play("MainToCreation")
 	# Player Signed-Up -> Enter Race
 	elif player_race >= 0 && player_race < races.size():
 		if second_player_race_forced:

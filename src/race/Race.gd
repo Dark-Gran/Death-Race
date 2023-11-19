@@ -73,8 +73,9 @@ func _ready() -> void:
 		max_lap += Main.current_player_race
 		current_id = Main.current_maps[Main.current_player_race][1]
 		pick_sabotauge()
-		pick_rocketfuels()
-		pick_mined()
+		if Main.ci.campaign_stats[6]:
+			pick_rocketfuels()
+			pick_mined()
 		load_cars()
 	call_deferred("move_to_track", current_id)
 

@@ -5,13 +5,14 @@ class_name Car
 # 2. Applying forces on 4 specific points in the single body
 # 3. For each point/wheel, watching over longitudinal and lateral forces separately (counter-impulse in lateral direction simulates friction etc)
 
+# condition of cars gets changed by Race based on CampaignInfo
 export(float) var collision_fragility = 0.3684
 export(float) var collision_mass_threshhold = 200 # mass required for RigidBody to apply collision damage
 # possibly: apply damage from all bodies but scale it by weight (or momentum) 
 
 export(float) var engine_power = 60.0
 export(float) var reverse_power = 0.5 # cuts engine power in reverse
-export(float) var transmission = 0.7
+export(float) var transmission = 0.6
 
 export(float) var base_linear_friction = 0.3
 export(float) var base_angular_friction = 0.1
@@ -19,7 +20,7 @@ export(float) var lateral_resistance = 35.0
 export(float) var heavy_resistance = 55.0 # for wheels marked as "carries_weight" (difference from lateral_resistance allows from max drifts)
 export(float) var handbrake_resistance = 20 # lateral
 export(float) var handbrake_heavy_resistance = 40 # lateral
-export(float) var handbrake_power = 9.0 # longitudinal
+export(float) var handbrake_power = 15.0 # longitudinal
 export(float) var handbrake_friction = 0.1
 
 export(float) var max_ammo = 120.0
@@ -73,8 +74,8 @@ const TT_THRESHHOLD:float = 2.0
 const HOLEMAGNET_TRESHHOLD:float = 3.0 # linear velocity
 const DEFAULT_EXPLOSION_DELAY = 1.25 # used by trains (holes always override)
 
-onready var max_speed:float = (engine_power+nitro_power)*drag_coef # used by gui
-onready var max_speed_regular:float = engine_power*drag_coef
+onready var max_speed:float = (engine_power+nitro_power)*drag_coef*0.5 # used by gui
+onready var max_speed_regular:float = engine_power*drag_coef*0.5
 
 var lost_control:bool = false
 var explosion_timer:float = 0.0

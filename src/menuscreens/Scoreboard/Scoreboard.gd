@@ -48,6 +48,7 @@ func prep_rewards(save_cash_and_condition:bool=true) -> void:
 	# Check player race
 	var all_but_player_are_dead:bool = true # "reaper"
 	var target_not_player_are_dead:bool = true # "kill quest"
+	var player_cei:Main.CarEndInfo = null
 	if Main.player_race_outcome.size() == 0:
 		all_but_player_are_dead = false
 		target_not_player_are_dead = false
@@ -64,6 +65,7 @@ func prep_rewards(save_cash_and_condition:bool=true) -> void:
 				else:
 					Main.ci.bot_infos[cei.driver_name][CI.DriverInfo.LAST_REWARD_POINTS] = 0
 			else:
+				player_cei = cei
 				if cei.position < 0 || cei.position == 3 || Main.player_lapped:
 					Main.ci.player_info[CI.DriverInfo.LAST_REWARD_POINTS] = 0
 					if cei.grabbed_cash > 0:
@@ -90,14 +92,19 @@ func prep_rewards(save_cash_and_condition:bool=true) -> void:
 						get_tree().get_root().get_node("MenuScreens").new_dialog(
 							"You fuckin' know what getting fuckin' lapped fuckin' is?\nIt means that I ain't makin' no fuckin' mony, and the same goes for fuckin' you."
 						)
-				if save_cash_and_condition:
-					# Apply Cash+Condition
-					if Main.is_player(cei.driver_name):
-						Main.ci.player_info[CI.DriverInfo.CASH] += cei.reward_cash+cei.grabbed_cash
-						if Main.ci.player_info[CI.DriverInfo.CASH] < 0:
-							Main.ci.player_info[CI.DriverInfo.CASH] = 0
-							print("Player below zero cash!") # in-future: dialog or mechanic
-						Main.ci.player_info[CI.DriverInfo.CARS][0][CI.CarSlot.CONDITION] = cei.condition
+	if player_cei != null && save_cash_and_condition:
+		# Apply Cash+Condition
+		if Main.is_player(player_cei.driver_name):
+			if Main.current_kill_target != "" && !target_not_player_are_dead:
+				forfeited_cash = player_cei.reward_cash+player_cei.grabbed_cash
+				player_cei.grabbed_cash = 0
+				player_cei.reward_cash = 0
+			else:
+				Main.ci.player_info[CI.DriverInfo.CASH] += player_cei.reward_cash+player_cei.grabbed_cash
+			if Main.ci.player_info[CI.DriverInfo.CASH] < 0:
+				#Main.ci.player_info[CI.DriverInfo.CASH] = 0
+				print("Player below zero cash!") # in-future: dialog or mechanic
+			Main.ci.player_info[CI.DriverInfo.CARS][0][CI.CarSlot.CONDITION] = player_cei.condition
 	if !Main.player_lapped && all_but_player_are_dead:
 		bonus_cash = CI.REAPER_REWARDS[Main.current_player_race]
 		Main.ci.player_info[CI.DriverInfo.CASH] += CI.REAPER_REWARDS[Main.current_player_race]
@@ -114,7 +121,7 @@ func prep_rewards(save_cash_and_condition:bool=true) -> void:
 			)
 		else:
 			get_tree().get_root().get_node("MenuScreens").new_dialog(
-				"Well. Guess you forgot.\n'Cause you wouldn't fuck me over on purpose, would you?\nYeah. What I thought."
+				"Well. Guess you forgot.\n'Cause you wouldn't fuck me over on purpose, would you?\nYeah. What I thought. I still need to compensate you know."
 			)
 
 func apply_point_rewards() -> void:

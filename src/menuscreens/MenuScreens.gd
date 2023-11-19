@@ -76,6 +76,8 @@ func _ready() -> void:
 	mm_dialog.visible = false
 	if Main.fresh_out_of_race:
 		set_new_screen(MenuScreenType.SCOREBOARD)
+		$Viewports/Viewport/Camera/AnimationPlayer.play("MainToCreation")
+		$Viewports/Viewport/Camera/AnimationPlayer.advance(2)
 	else:
 		set_new_screen(MenuScreenType.MAIN)
 	Main.loading_scene.toggle_loading_signs(false)
@@ -114,12 +116,10 @@ func ini_screen_focus() -> void:
 		MenuScreenType.RACE_PICK:
 			race_pick_ui.ini_race_pick()
 			race_pick_ui.visible = true
-			if mm_making_new_save:
-				mm_spatial.visible = true
-				garage_spatial.visible = false
-			else:
-				mm_spatial.visible = false
-				garage_spatial.visible = true
+			mm_spatial.visible = true
+			garage_spatial.visible = true
+			garage_ui.hide_shop_car()
+			$Viewports/Viewport/Camera/AnimationPlayer.play_backwards("MainToCreation")
 		MenuScreenType.SCOREBOARD:
 			mm_menu.visible = false
 			mm_spatial.visible = false
@@ -171,19 +171,20 @@ func end_screen_focus() -> void:
 			mm_menu.visible = false
 			mm_options.visible = false
 			mm_creation.visible = false
-			mm_spatial.visible = false
+			#mm_spatial.visible = false
 		MenuScreenType.RACE_PICK:
 			race_pick_ui.visible = false
-			if mm_making_new_save:
-				mm_spatial.visible = false
-			else:
-				garage_spatial.visible = false
+			#if mm_making_new_save:
+			#	mm_spatial.visible = false
+			#else:
+			#	garage_spatial.visible = false
 		MenuScreenType.SCOREBOARD:
 			scoreboard_ui.visible = false
-			mm_spatial.visible = false
+			#mm_spatial.visible = false
 		MenuScreenType.GARAGE:
 			garage_ui.visible = false
 			garage_spatial.visible = false
+			mm_spatial.visible = true
 		MenuScreenType.PHOTO:
 			$Viewports/Viewport/PhotoScene.visible = false
 

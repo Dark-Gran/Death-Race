@@ -3,6 +3,7 @@ class_name Checkpoint
 
 export(int) var id = 0
 export(bool) var botpoint = false
+export(bool) var bot_forbid_nitro = false
 export(int) var route = 0 # for botpoints
 
 func _on_body_entered(body) -> void: # signal

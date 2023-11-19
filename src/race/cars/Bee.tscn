@@ -33,7 +33,7 @@ extents = Vector3( 0.728282, 0.247238, 1.12517 )
 [node name="Car" type="RigidBody" groups=["cars"]]
 collision_layer = 114
 collision_mask = 2
-mass = 1400.0
+mass = 1600.0
 physics_material_override = ExtResource( 15 )
 gravity_scale = 0.0
 contacts_reported = 10
@@ -43,10 +43,10 @@ axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource( 5 )
-condition = 160.0
-engine_power = 150.0
-lateral_resistance = 80.0
-heavy_resistance = 100.0
+condition = 180.0
+engine_power = 200.0
+lateral_resistance = 180.0
+heavy_resistance = 190.0
 main_mat_index = 0
 light_mat_index = 4
 wheel_mass_coef = 13.0
@@ -98,7 +98,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.799794, -0.716131, 1.17819 )
 visible = false
 
 [node name="CollisionShape3" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.740663, -0.487983, 1.17819 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.740663, -0.479797, 1.17819 )
 visible = false
 shape = ExtResource( 16 )
 
@@ -132,7 +132,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, -0.71571, 1.17807 )
 visible = false
 
 [node name="CollisionShape4" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.738757, -0.48771, 1.17807 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.738757, -0.479524, 1.17807 )
 visible = false
 shape = ExtResource( 16 )
 
@@ -163,7 +163,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, -0.716131, -1.22069 )
 visible = false
 
 [node name="CollisionShape5" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.740869, -0.48771, -1.22069 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.740869, -0.479524, -1.22069 )
 visible = false
 shape = ExtResource( 16 )
 
@@ -194,7 +194,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, -0.71571, -1.22093 )
 visible = false
 
 [node name="CollisionShape6" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.738757, -0.48771, -1.22093 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.738757, -0.479524, -1.22093 )
 visible = false
 shape = ExtResource( 16 )
 

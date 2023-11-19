@@ -40,14 +40,18 @@ func set_focus(f:bool) -> void:
 		Type.START:
 			if f:
 				self.text = "Start."
+				self.modulate = Color.red
 			else:
 				self.text = "Start"
+				self.modulate = Color.white
 			return
 		Type.BACK:
 			if f:
 				self.text = "Back."
+				self.modulate = Color.red
 			else:
 				self.text = "Back"
+				self.modulate = Color.white
 			return
 		Type.NAME:
 			if f:

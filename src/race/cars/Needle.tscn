@@ -42,18 +42,18 @@ axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource( 5 )
-condition = 130.0
+condition = 150.0
 collision_fragility = 0.4
-engine_power = 220.0
+engine_power = 270.0
 transmission = 0.8
-lateral_resistance = 150.0
-heavy_resistance = 180.0
+lateral_resistance = 190.0
+heavy_resistance = 230.0
 handbrake_resistance = 65.0
 handbrake_heavy_resistance = 115.0
-handbrake_power = 16.0
+handbrake_power = 30.0
 light_mat_index = 2
 wheel_mass_coef = 15.0
-bot_recovery_time_adjust = 0.75
+bot_recovery_time_adjust = 0.95
 bot_stuck_velocity = 1.5
 
 [node name="Gun" parent="." instance=ExtResource( 12 )]
